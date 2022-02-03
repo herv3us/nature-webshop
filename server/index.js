@@ -1,0 +1,31 @@
+require('dotenv').config();
+const config = require('./utilities/config');
+const mongoose = require('mongoose');
+const express = require('express');
+const cors = require('cors');
+const PORT = process.env.PORT || 8000;
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  res.send('Hello world! 🐳');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server up and running on port: ${PORT}`);
+});
+
+mongoose
+  .connect(config.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to the database...');
+  })
+  .catch((err) => {
+    console.log('There was an error connecting to the database: ', err);
+  });
