@@ -1,0 +1,16 @@
+{
+  "name": "nature",
+  "version": "1.0.0",
+  "description": "Project for school, where I'm suppose to make a webshop for something to do with nature. It should be made in TypeScript for the frontend parts and rent tests for it.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Sofia Hervéus",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2"
+  }
+}
