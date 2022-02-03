@@ -8,7 +8,7 @@ const getAllProducts = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      pruducts: products,
+      products: products,
     });
   } catch (err) {
     console.log(err);
