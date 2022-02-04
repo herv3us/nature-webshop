@@ -18,4 +18,10 @@ describe('Tests for ProductCardMini', () => {
     const image = screen.getByRole('img');
     expect(image).toBeInTheDocument();
   });
+
+  it('render the price of the product', () => {
+    render(<ProductCardMini product={singleProduct} />);
+    const price = screen.getByText(`${singleProduct.price} kr`);
+    expect(price).toBeInTheDocument();
+  });
 });
