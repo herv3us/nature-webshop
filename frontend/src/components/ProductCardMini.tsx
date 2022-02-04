@@ -57,7 +57,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   width: 100%;
   height: 130px;
-
+  color: #313131;
   h2 {
     width: 90%;
     font-size: 1.3rem;

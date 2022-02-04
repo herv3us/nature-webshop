@@ -3,11 +3,13 @@ import StartPage from './pages/StartPage';
 import LoginPage from './pages/LoginPage';
 import ProductPage from './pages/ProductPage';
 import styled from 'styled-components';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
       <Wrapper>
+        <Navbar />
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<LoginPage />} />

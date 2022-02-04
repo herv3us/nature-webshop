@@ -2,6 +2,12 @@ import ProductCardMini from '../ProductCardMini';
 import { render, screen } from '@testing-library/react';
 import { singleProduct } from './../../dummyData/products';
 
+const mockedNavigator = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockedNavigator,
+}));
+
 describe('Tests for ProductCardMini', () => {
   it('it render without crashing', () => {
     render(<ProductCardMini product={singleProduct} />);

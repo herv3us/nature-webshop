@@ -32,7 +32,7 @@ export default StartPage;
 
 const Wrapper = styled.div`
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0 auto 5rem;
 `;
 
 const WrapperUl = styled.ul`
@@ -43,15 +43,15 @@ const WrapperUl = styled.ul`
   margin: 0 auto;
   padding: 2rem 2rem;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 870px) {
+  @media (max-width: 1000px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 750px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
