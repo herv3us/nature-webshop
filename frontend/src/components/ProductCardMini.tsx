@@ -1,4 +1,5 @@
 import { Product } from './../models/Product';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface Props {
@@ -7,9 +8,15 @@ interface Props {
 
 function ProductCardMini(props: Props) {
   const { product } = props;
+  const navigate = useNavigate();
+
+  const handleClick = (e: any) => {
+    e.stopPropagation();
+    navigate(`/products/${product.id}`);
+  };
 
   return (
-    <WrapperLi>
+    <WrapperLi onClick={(e) => handleClick(e)}>
       <Image src={product.imgUrl} alt={product.title} />
       <Wrapper>
         <h2>{product.title}</h2>
@@ -24,7 +31,7 @@ export default ProductCardMini;
 const WrapperLi = styled.li`
   cursor: pointer;
   border-radius: 0.3rem;
-  box-shadow: 0px 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0.25rem 0.5rem rgba(0, 0, 0, 0.7);
   list-style-type: none;
   position: relative;
   overflow: hidden;
@@ -48,7 +55,6 @@ const Wrapper = styled.div`
   z-index: 20;
   background-color: #ffffff9b;
   overflow: hidden;
-
   width: 100%;
   height: 130px;
 
@@ -61,6 +67,6 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  max-height: 400px;
+  max-height: 450px;
   width: auto;
 `;

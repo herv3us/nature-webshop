@@ -11,8 +11,9 @@ export const Video = styled.div`
   overflow: hidden;
 
   video {
-    height: 100%;
+    height: 95%;
     width: 100%;
     object-fit: cover;
+    margin: 0 auto;
   }
 `;

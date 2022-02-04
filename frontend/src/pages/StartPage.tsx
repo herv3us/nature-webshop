@@ -39,9 +39,9 @@ const WrapperUl = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 0.5rem;
+  padding: 2rem 2rem;
 
   @media (max-width: 1050px) {
     grid-template-columns: repeat(3, 1fr);
@@ -49,10 +49,6 @@ const WrapperUl = styled.ul`
 
   @media (max-width: 870px) {
     grid-template-columns: repeat(2, 1fr);
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 auto; */
   }
 
   @media (max-width: 650px) {
