@@ -8,11 +8,11 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please enter a username'],
     unique: true,
   },
-  firstname: {
+  firstName: {
     type: String,
     required: [true, 'Please enter a first name'],
   },
-  lastname: {
+  lastName: {
     type: String,
     required: [true, 'Please enter a last name'],
   },
@@ -20,9 +20,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter your address'],
   },
-  sipCode: {
+  zipCode: {
     type: String,
-    required: [true, 'Please enter your Sip Code'],
+    required: [true, 'Please enter your zip code'],
   },
   password: {
     type: String,

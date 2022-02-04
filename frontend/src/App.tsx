@@ -13,7 +13,6 @@ function App() {
 
   const getProducts = async () => {
     const data = await getAllProducts();
-    console.log(data);
     console.log(data.products);
     setProducts(data.products);
   };

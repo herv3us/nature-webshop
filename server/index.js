@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 const PORT = process.env.PORT || 8000;
 
 const app = express();
@@ -16,6 +18,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server up and running on port: ${PORT}`);
