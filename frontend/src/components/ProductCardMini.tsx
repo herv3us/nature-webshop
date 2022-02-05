@@ -38,6 +38,8 @@ const WrapperLi = styled.li`
   transform: scale(1.01);
   transition: all 0.3s;
   width: fit-content;
+  max-width: 500px;
+  max-width: 320px;
 
   &:hover {
     transform: scale(1.02);
@@ -67,6 +69,7 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  max-height: 450px;
+  height: 100%;
   width: auto;
+  object-fit: cover;
 `;

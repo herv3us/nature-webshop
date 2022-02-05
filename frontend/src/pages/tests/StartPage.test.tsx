@@ -4,7 +4,6 @@ import { products } from '../../dummyData/products';
 
 const setProductsMock = jest.fn();
 const searchMock = jest.fn();
-const setSearchStringMock = jest.fn();
 
 describe('Tests for StartPage', () => {
   it('render without crashing', () => {
@@ -14,8 +13,6 @@ describe('Tests for StartPage', () => {
         products={products}
         setProducts={setProductsMock}
         search={searchMock}
-        searchString={'Some text'}
-        setSearchString={setSearchStringMock}
       />
     );
   });

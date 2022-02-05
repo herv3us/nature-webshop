@@ -1,23 +1,34 @@
 import { useNavigate } from 'react-router-dom';
 import { Product } from './../models/Product';
-import SearchForm from './SearchForm';
 import styled from 'styled-components';
+import SearchForm from './SearchForm';
 interface Props {
   products: Product[];
   setProducts: Function;
+  searchString: string;
+  setSearchString: Function;
 }
 
 function Navbar(props: Props) {
-  const { products, setProducts } = props;
-
+  const { products, setProducts, searchString, setSearchString } = props;
   const navigate = useNavigate();
+
   return (
     <StyledNavbar>
       <li onClick={() => navigate('/')} title="Startsida" className="home">
         ⛺
       </li>
       <StyledUl>
-        <li onClick={() => navigate('/login')}>Login</li>
+        <li onClick={() => navigate('/jacket')}>Jackor</li>
+        <li onClick={() => navigate('/shoes')}>Skor</li>
+        <li onClick={() => navigate('/backpack')}>Ryggsäckar</li>
+        <li>
+          <SearchForm
+            searchString={searchString}
+            setSearchString={setSearchString}
+          />
+        </li>
+        <li onClick={() => navigate('/login')}>Mina sidor</li>
         <li onClick={() => navigate('/cart')} title="Kundkorg">
           🛒
         </li>
@@ -38,6 +49,7 @@ const StyledNavbar = styled.nav`
   z-index: 100;
   scroll-behavior: smooth;
   list-style-type: none;
+  color: #eee;
 
   .home {
     font-size: 3.5rem;

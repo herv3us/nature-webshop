@@ -20,7 +20,6 @@ function SearchForm(props: Props) {
 export default SearchForm;
 
 const StyledSearch = styled.input`
-  margin-top: 0;
   padding: 0.5rem 2rem;
   border-radius: 0.3rem;
   border: none;
