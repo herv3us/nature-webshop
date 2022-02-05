@@ -2,18 +2,26 @@ import styled from 'styled-components';
 import { Video } from './../styling/Video.styled';
 import { Flex } from './../styling/Flex.styled';
 
-function Header() {
+interface Props {
+  src: string;
+  title: string;
+  subtitle: string;
+}
+
+function Header(props: Props) {
+  const { src, title, subtitle } = props;
+
   return (
     <div>
       <StyledDiv>
         <StyledHeadings>
-          <h1>Welcome to Nature ⛺</h1>
-          <h3>Your adventure starts here.</h3>
+          <h1>{title}</h1>
+          <h3>{subtitle}</h3>
         </StyledHeadings>
 
         <Video>
           <video autoPlay loop role="video">
-            <source src="/images/adventure.mp4" />
+            <source src={src} />
             Your browser does not support the video tag.
           </video>
         </Video>

@@ -5,7 +5,13 @@ import { Product } from './../models/Product';
 import styled from 'styled-components';
 import ProductCardMini from '../components/ProductCardMini';
 
-function StartPage() {
+interface Props {
+  src: string;
+}
+
+function StartPage(props: Props) {
+  const { src } = props;
+
   const [products, setProducts] = useState<[Product] | []>([]);
 
   useEffect(() => {
@@ -18,7 +24,11 @@ function StartPage() {
   };
   return (
     <Wrapper>
-      <Header />
+      <Header
+        src={src}
+        title={'Welcome to Nature ⛺'}
+        subtitle={'Your adventure starts here.'}
+      />
       <WrapperUl>
         {products.map((product) => (
           <ProductCardMini product={product} key={product.id} />

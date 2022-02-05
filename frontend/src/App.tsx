@@ -6,12 +6,19 @@ import styled from 'styled-components';
 import Navbar from './components/Navbar';
 
 function App() {
+  const srcVideo: [string, string, string, string, string] = [
+    '/images/adventure.mp4',
+    '/images/backpack.mp4',
+    '/images/beenie.mp4',
+    '/images/jacket.mp4',
+    '/images/shoes.mp4',
+  ];
   return (
     <Router>
       <Wrapper>
         <Navbar />
         <Routes>
-          <Route path="/" element={<StartPage />} />
+          <Route path="/" element={<StartPage src={srcVideo[0]} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products/:productid" element={<ProductPage />} />
         </Routes>

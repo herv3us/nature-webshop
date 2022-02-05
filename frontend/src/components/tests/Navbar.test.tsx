@@ -23,4 +23,10 @@ describe('Tests for Navbar', () => {
     const login = screen.getByText(/Login/i);
     expect(login).toBeInTheDocument();
   });
+
+  it('render the link for the cart', () => {
+    render(<Navbar />);
+    const login = screen.getByText(/🛒/i);
+    expect(login).toBeInTheDocument();
+  });
 });
