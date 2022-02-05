@@ -1,7 +1,15 @@
 import { useNavigate } from 'react-router-dom';
+import { Product } from './../models/Product';
+import SearchForm from './SearchForm';
 import styled from 'styled-components';
+interface Props {
+  products: Product[];
+  setProducts: Function;
+}
 
-function Navbar() {
+function Navbar(props: Props) {
+  const { products, setProducts } = props;
+
   const navigate = useNavigate();
   return (
     <StyledNavbar>

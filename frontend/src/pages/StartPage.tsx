@@ -1,18 +1,24 @@
-import Header from './../components/Header';
-import { useEffect, useState } from 'react';
 import { getAllProducts } from './../services/productService';
+import { useEffect, useState } from 'react';
 import { Product } from './../models/Product';
-import styled from 'styled-components';
+import Header from './../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
+import styled from 'styled-components';
+import SearchForm from '../components/SearchForm';
 
 interface Props {
   src: string;
+  products: Product[];
+  setProducts: Function;
+  search: Function;
+  searchString: string;
+  setSearchString: Function;
 }
 
 function StartPage(props: Props) {
-  const { src } = props;
-
-  const [products, setProducts] = useState<[Product] | []>([]);
+  const { src, products, setProducts, search, searchString, setSearchString } =
+    props;
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     getProducts();
@@ -21,7 +27,9 @@ function StartPage(props: Props) {
   const getProducts = async () => {
     const data = await getAllProducts();
     setProducts(data.products);
+    setIsLoaded(true);
   };
+
   return (
     <Wrapper>
       <Header
@@ -29,11 +37,19 @@ function StartPage(props: Props) {
         title={'Welcome to Nature ⛺'}
         subtitle={'Your adventure starts here.'}
       />
-      <WrapperUl>
-        {products.map((product) => (
-          <ProductCardMini product={product} key={product.id} />
-        ))}
-      </WrapperUl>
+      <SearchForm
+        searchString={searchString}
+        setSearchString={setSearchString}
+      />
+      {!isLoaded ? (
+        <div>Loading...</div>
+      ) : (
+        <WrapperUl>
+          {search(products).map((product: any) => (
+            <ProductCardMini product={product} key={product.id} />
+          ))}
+        </WrapperUl>
+      )}
     </Wrapper>
   );
 }

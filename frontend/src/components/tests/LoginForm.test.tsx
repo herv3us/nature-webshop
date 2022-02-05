@@ -1,6 +1,5 @@
 import LoginForm from '../LoginForm';
 import { render, screen } from '@testing-library/react';
-import { toUnicode } from 'punycode';
 
 describe('Tests for LoginForm', () => {
   it('render without crashing', () => {
