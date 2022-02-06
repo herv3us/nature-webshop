@@ -1,9 +1,17 @@
 import React from 'react';
+import { Product } from '../models/Product';
 
-function PorductCard() {
+interface Props {
+  product: Product;
+}
+
+function PorductCard(props: Props) {
+  const { product } = props;
+
   return (
     <div>
-      <h2>Hello</h2>
+      <h1>{product.title}</h1>
+      <img src={product.imgUrl} alt={product.title} />
     </div>
   );
 }

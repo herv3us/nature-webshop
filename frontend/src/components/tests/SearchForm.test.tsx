@@ -21,7 +21,7 @@ describe('Tests for SearchForm', () => {
       />
     );
 
-    const inputElem = screen.getByPlaceholderText(/search product/i);
+    const inputElem = screen.getByPlaceholderText(/sök/i);
     expect(inputElem).toBeInTheDocument();
   });
 });

@@ -38,8 +38,8 @@ const WrapperLi = styled.li`
   transform: scale(1.01);
   transition: all 0.3s;
   width: fit-content;
-  max-width: 500px;
-  max-width: 320px;
+  min-height: 400px;
+  max-width: 340px;
 
   &:hover {
     transform: scale(1.02);

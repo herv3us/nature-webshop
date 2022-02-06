@@ -59,12 +59,7 @@ function App() {
   return (
     <Router>
       <Wrapper>
-        <Navbar
-          products={products}
-          setProducts={setProducts}
-          searchString={searchString}
-          setSearchString={setSearchString}
-        />
+        <Navbar searchString={searchString} setSearchString={setSearchString} />
         <Routes>
           <Route
             path="/"

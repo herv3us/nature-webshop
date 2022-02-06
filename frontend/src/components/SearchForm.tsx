@@ -10,7 +10,7 @@ function SearchForm(props: Props) {
   return (
     <StyledSearch
       type="search"
-      placeholder="Search product..."
+      placeholder="Sök"
       value={searchString}
       onChange={(e) => setSearchString(e.target.value)}
     />
@@ -25,7 +25,7 @@ const StyledSearch = styled.input`
   border: none;
 
   &:focus {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     outline: none;
   }
 `;
