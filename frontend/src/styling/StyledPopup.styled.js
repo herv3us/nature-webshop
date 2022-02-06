@@ -12,7 +12,7 @@ export const Overlay = styled.div`
 
 export const PopupWindow = styled.div`
   position: relative;
-  width: 70%;
+  width: 55%;
   margin: 0 auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
@@ -41,9 +41,11 @@ export const Content = styled.div`
   margin-left: 1rem;
   border: 3px;
   color: #353535;
+  border-radius: 3px;
 
   h1 {
     text-align: center;
+    margin-top: 2rem;
   }
 `;
 
@@ -63,5 +65,33 @@ export const Button = styled.button`
   &:hover {
     color: #eee;
     background-color: #c04e4e;
+    cursor: pointer;
   }
+`;
+
+export const StyledContent = styled.div`
+  padding: 1.5rem 2.4rem;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const StyledPrice = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  height: 100%;
+
+  span {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    padding: 0.1rem 1rem 0.1rem 0.1rem;
+    border-radius: 2px;
+  }
+`;
+
+export const StockWarning = styled.p`
+  color: #c04e4e;
+  margin: 2rem 0 0;
 `;

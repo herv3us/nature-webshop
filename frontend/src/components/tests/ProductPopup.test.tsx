@@ -38,7 +38,7 @@ describe('Test for ProductPopup', () => {
 
   it('render the amount left of the product', () => {
     render(<ProductPopup product={singleProduct} setIsOpen={setIsOpenMock} />);
-    const stock = screen.getByText(singleProduct.stock);
+    const stock = screen.getByText(singleProduct.stock + ' st');
     expect(stock).toBeInTheDocument();
   });
 
@@ -57,5 +57,11 @@ describe('Test for ProductPopup', () => {
     );
     const highStock = screen.queryByText(/endast ett fåtal kvar i lager/i);
     expect(highStock).not.toBeInTheDocument();
+  });
+
+  it('render the price of the product', () => {
+    render(<ProductPopup product={singleProduct} setIsOpen={setIsOpenMock} />);
+    const price = screen.getByText(`Pris: ${singleProduct.price}`);
+    expect(price).toBeInTheDocument();
   });
 });

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Product } from './../models/Product';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ProductPopup from './ProductPopup';
 
@@ -10,18 +9,7 @@ interface Props {
 
 function ProductCardMini(props: Props) {
   const { product } = props;
-  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleToggle = () => {
-    // e.stopPropagation();
-    // navigate(`/products/${product.id}`);
-    if (isOpen === true) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  };
 
   return (
     <div>

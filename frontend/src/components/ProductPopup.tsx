@@ -6,6 +6,9 @@ import {
   Image,
   Content,
   Button,
+  StyledContent,
+  StyledPrice,
+  StockWarning,
 } from '../styling/StyledPopup.styled';
 
 interface Props {
@@ -32,15 +35,23 @@ function ProductPopup(props: Props) {
         <Content>
           <Button onClick={() => setIsOpen(false)}>X</Button>
           <h1>{product.title}</h1>
-          <div>
-            <p>{product.description}</p>
+          <StyledContent>
             <div>
-              <small>
-                Kvar i lager: <br /> <span>{product.stock}</span>
-              </small>
-              <p>{product.stock <= 5 ? lowStockMessage : null}</p>
+              <h4>Om produkten</h4>
+              <p>{product.description}</p>
             </div>
-          </div>
+            <StockWarning>
+              {product.stock <= 5 ? lowStockMessage : null}
+            </StockWarning>
+            <StyledPrice>
+              <div>
+                <small>
+                  Kvar i lager: <br /> <span>{product.stock} st</span>
+                </small>
+              </div>
+              <p>Pris: {product.price}</p>
+            </StyledPrice>
+          </StyledContent>
         </Content>
       </PopupWindow>
     </Overlay>
