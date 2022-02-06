@@ -18,12 +18,6 @@ describe('Tests for UserInfo', () => {
     render(<UserInformation />);
   });
 
-  it('render a welcome-text for the user', () => {
-    render(<UserInformation />);
-    const welcome = screen.getByText(`Hej ${user.firstName}`);
-    expect(welcome).toBeInTheDocument();
-  });
-
   it('render an information text', () => {
     render(<UserInformation />);
     const text = screen.getByText(/Denna information har vi sparat/i);

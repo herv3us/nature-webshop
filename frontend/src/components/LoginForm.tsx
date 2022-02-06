@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { login } from '../services/loginServices';
 import {
   saveTokenInLocalStorage,
@@ -17,6 +17,11 @@ function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  const resetForm = () => {
+    setUsername('');
+    setPassword('');
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,14 +42,9 @@ function LoginForm() {
       console.log('No data found');
     } else if (data.success) {
       saveTokenInLocalStorage(data.token);
-      console.log(data.user);
       saveUserInLocalStorage(data.user);
+      window.location.reload();
     }
-  };
-
-  const resetForm = () => {
-    setUsername('');
-    setPassword('');
   };
 
   return (
