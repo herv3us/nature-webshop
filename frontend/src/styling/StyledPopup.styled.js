@@ -12,7 +12,7 @@ export const Overlay = styled.div`
 
 export const PopupWindow = styled.div`
   position: relative;
-  width: 55%;
+  width: 70%;
   margin: 0 auto;
   max-height: 70vh;
   margin-top: calc(100vh - 85vh - 20px);
@@ -24,10 +24,6 @@ export const PopupWindow = styled.div`
   display: flex;
   box-shadow: 0px 0.25rem 0.8rem rgba(0, 0, 0, 0.7);
 
-  @media (max-width: 1450px) {
-    width: 70%;
-  }
-
   @media (max-width: 1250px) {
     width: 85%;
   }
@@ -37,8 +33,10 @@ export const PopupWindow = styled.div`
   }
 
   @media (max-width: 655px) {
+    width: 70%;
     flex-direction: column;
     height: fit-content;
+    font-size: 0.7rem;
   }
 `;
 
@@ -54,8 +52,8 @@ export const Image = styled.img`
   }
 
   @media (max-width: 655px) {
-    width: 350px;
-    max-height: 350px;
+    max-height: 250px;
+    width: 250px;
     margin: 0 auto;
   }
 `;
@@ -106,8 +104,7 @@ export const Button = styled.button`
   text-align: center;
 
   @media (max-width: 655px) {
-    top: -24rem;
-    right: -5rem;
+    top: -17.5rem;
   }
 
   &:hover {

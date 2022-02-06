@@ -4,7 +4,7 @@ function UserInformation() {
   const user = getUserFromLocalStorage();
   return (
     <div>
-      {/* <h2>Hej {user?.firstName}</h2>
+      <h2>Hej {user?.firstName}</h2>
       <p>
         Denna information har vi sparat om dig, för att du ska kunna göra köp
         hos oss:
@@ -17,7 +17,7 @@ function UserInformation() {
         <p>Adress: {user?.address}</p>
         <p>Postkod: {user?.zipCode}</p>
         <p>Stad: {user?.city}</p>
-      </div> */}
+      </div>
     </div>
   );
 }
