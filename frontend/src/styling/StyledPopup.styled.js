@@ -23,6 +23,23 @@ export const PopupWindow = styled.div`
   overflow: hidden;
   display: flex;
   box-shadow: 0px 0.25rem 0.8rem rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 1450px) {
+    width: 70%;
+  }
+
+  @media (max-width: 1250px) {
+    width: 85%;
+  }
+
+  @media (max-width: 712px) {
+    width: 93%;
+  }
+
+  @media (max-width: 655px) {
+    flex-direction: column;
+    height: fit-content;
+  }
 `;
 
 export const Image = styled.img`
@@ -31,6 +48,16 @@ export const Image = styled.img`
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 0px 0.25rem 0.5rem rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 855px) {
+    height: 350px;
+  }
+
+  @media (max-width: 655px) {
+    width: 350px;
+    max-height: 350px;
+    margin: 0 auto;
+  }
 `;
 
 export const Content = styled.div`
@@ -43,9 +70,25 @@ export const Content = styled.div`
   color: #353535;
   border-radius: 3px;
 
+  @media (max-width: 855px) {
+    height: 350px;
+    margin: 0.5rem 0.5rem;
+  }
+
+  @media (max-width: 655px) {
+    width: 350px;
+    height: fit-content;
+    margin: 0.5rem auto;
+  }
+
   h1 {
     text-align: center;
     margin-top: 2rem;
+
+    @media (max-width: 950px) {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+    }
   }
 `;
 
@@ -62,6 +105,11 @@ export const Button = styled.button`
   width: 2rem;
   text-align: center;
 
+  @media (max-width: 655px) {
+    top: -24rem;
+    right: -5rem;
+  }
+
   &:hover {
     color: #eee;
     background-color: #c04e4e;
@@ -75,6 +123,10 @@ export const StyledContent = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 950px) {
+    padding: 0;
+  }
 `;
 
 export const StyledPrice = styled.div`
@@ -83,6 +135,10 @@ export const StyledPrice = styled.div`
   justify-content: space-between;
   margin-top: 2rem;
   height: 100%;
+
+  @media (max-width: 950px) {
+    margin-top: 0.1rem;
+  }
 
   span {
     border: 1px solid rgba(0, 0, 0, 0.4);

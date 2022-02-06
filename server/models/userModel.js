@@ -5,29 +5,33 @@ const jwt = require('jsonwebtoken');
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Please enter a username'],
+    required: [true, 'Vänligen fyll i ett önskat username'],
     unique: true,
   },
   firstName: {
     type: String,
-    required: [true, 'Please enter a first name'],
+    required: [true, 'Vänligen fyll i ditt förnamn'],
   },
   lastName: {
     type: String,
-    required: [true, 'Please enter a last name'],
+    required: [true, 'Vänligen fyll i ditt efternamn'],
   },
   address: {
     type: String,
-    required: [true, 'Please enter your address'],
+    required: [true, 'Vänligen fyll i din postadress'],
   },
   zipCode: {
     type: String,
-    required: [true, 'Please enter your zip code'],
+    required: [true, 'Vänligen tyll i postkod'],
+  },
+  city: {
+    type: String,
+    required: [true, 'Vänligen fyll i stad'],
   },
   password: {
     type: String,
-    required: [true, 'please enter a password.'],
-    minlength: [8, 'Password needs to be at least 8 characters long'],
+    required: [true, 'Fyll i ett lösenord'],
+    minlength: [8, 'Lösenordet måste vara minst 9 tecken.'],
   },
 });
 
@@ -38,6 +42,7 @@ userSchema.pre('save', async function (next) {
     return next();
   }
   this.password = await bcrypt.hash(this.password, saltRounds);
+  next();
 });
 
 userSchema.methods.checkPassword = function (enterdPass, userPass) {

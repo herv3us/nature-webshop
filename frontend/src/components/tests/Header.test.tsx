@@ -11,6 +11,7 @@ describe('Tests for Header', () => {
       />
     );
   });
+
   it('render a video in the background', () => {
     render(
       <Header
@@ -22,6 +23,7 @@ describe('Tests for Header', () => {
     const video = screen.getByRole('video');
     expect(video).toBeInTheDocument();
   });
+
   it('render a welcome-heading', () => {
     render(
       <Header
@@ -33,6 +35,7 @@ describe('Tests for Header', () => {
     const heading = screen.getByText(/WelcomeString/i);
     expect(heading).toBeInTheDocument();
   });
+
   it('render second heading', () => {
     render(
       <Header
