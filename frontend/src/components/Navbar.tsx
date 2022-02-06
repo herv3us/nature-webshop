@@ -43,7 +43,7 @@ const StyledNavbar = styled.nav`
   background-color: #eee;
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 10;
   list-style-type: none;
   color: #353535;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);

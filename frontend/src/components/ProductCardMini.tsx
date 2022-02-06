@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Product } from './../models/Product';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ProductPopup from './ProductPopup';
 
 interface Props {
   product: Product;
@@ -9,20 +11,29 @@ interface Props {
 function ProductCardMini(props: Props) {
   const { product } = props;
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (e: any) => {
-    e.stopPropagation();
-    navigate(`/products/${product.id}`);
+  const handleToggle = () => {
+    // e.stopPropagation();
+    // navigate(`/products/${product.id}`);
+    if (isOpen === true) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
   };
 
   return (
-    <WrapperLi onClick={(e) => handleClick(e)}>
-      <Image src={product.imgUrl} alt={product.title} />
-      <Wrapper>
-        <h2>{product.title}</h2>
-        <small>{product.price} kr</small>
-      </Wrapper>
-    </WrapperLi>
+    <div>
+      <WrapperLi onClick={() => setIsOpen(true)}>
+        <Image src={product.imgUrl} alt={product.title} />
+        <Wrapper>
+          <h2>{product.title}</h2>
+          <small>{product.price} kr</small>
+        </Wrapper>
+      </WrapperLi>
+      {isOpen && <ProductPopup product={product} setIsOpen={setIsOpen} />}
+    </div>
   );
 }
 
@@ -38,8 +49,8 @@ const WrapperLi = styled.li`
   transform: scale(1.01);
   transition: all 0.3s;
   width: fit-content;
-  min-height: 400px;
-  max-width: 340px;
+  height: 400px;
+  width: 260px;
 
   &:hover {
     transform: scale(1.02);

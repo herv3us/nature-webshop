@@ -4,11 +4,10 @@ import { Product } from './models/Product';
 import StartPage from './pages/StartPage';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
-import ProductPage from './pages/ProductPage';
-import styled from 'styled-components';
-import BackpackPage from './pages/BackpackPage';
 import JacketPage from './pages/JacketPage';
+import BackpackPage from './pages/BackpackPage';
 import ShoesPage from './pages/ShoesPage';
+import styled from 'styled-components';
 
 function App() {
   const [products, setProducts] = useState<[] | [Product]>([]);
@@ -99,7 +98,6 @@ function App() {
               <ShoesPage src={srcVideo[4]} products={shoes} search={search} />
             }
           />
-          <Route path="/products/:productid" element={<ProductPage />} />
         </Routes>
       </Wrapper>
     </Router>
