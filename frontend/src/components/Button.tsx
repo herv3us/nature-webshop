@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getUserFromLocalStorage } from '../services/localStorageService';
+import {
+  getUserFromLocalStorage,
+  saveCartToLocalStorage,
+} from '../services/localStorageService';
 import { Product } from '../models/Product';
 import styled from 'styled-components';
 
@@ -14,16 +17,6 @@ function Button(props: Props) {
   const user = getUserFromLocalStorage();
   const [buttonText, setButtonText] = useState('');
 
-  const handleClick = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (user?.role === 'customer') {
-      console.log('Köp produkt');
-      setUserCart([...userCart, product]);
-      console.log(userCart);
-    }
-  };
-
   useEffect(() => {
     if (user?.role === 'admin') {
       setButtonText('Redigera');
@@ -31,6 +24,50 @@ function Button(props: Props) {
       setButtonText('Köp');
     }
   }, []);
+
+  const addToCart = () => {
+    if (userCart.length > 0) {
+      userCart.map((item) => {
+        if (item.id === product.id) {
+          const thisItem = { ...item };
+          if (item.inCart > 0) {
+            item.inCart++;
+          } else {
+            thisItem.inCart = +1 as number;
+          }
+          const updatedProduct = { ...thisItem };
+
+          const filterdArray = userCart.filter(
+            (item) => item.id !== product.id
+          );
+          const newCart = [updatedProduct, ...filterdArray];
+          //   console.log(newCart);
+          setUserCart(newCart);
+        } else {
+          const updateCart = [product, ...userCart];
+          setUserCart(updateCart);
+        }
+      });
+    } else if (userCart.length === 0) {
+      setUserCart([product]);
+    }
+  };
+
+  const handleClick = (e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (user?.role === 'customer') {
+      console.log('Im a user');
+      addToCart();
+    } else if (user?.role === 'admin') {
+      console.log('you want to edit this product');
+      // navigera admin till en sida där man kan uppdatera produkten
+    }
+  };
+
+  useEffect(() => {
+    saveCartToLocalStorage(userCart as Product[]);
+  }, [userCart]);
 
   return <StyledBtn onClick={(e) => handleClick(e)}>{buttonText}</StyledBtn>;
 }

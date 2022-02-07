@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Product } from './../models/Product';
 import Header from './../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
-import SearchForm from '../components/SearchForm';
 import styled from 'styled-components';
 import { WrapperUl } from '../styling/WrapperUl.styled';
 

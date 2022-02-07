@@ -7,6 +7,7 @@ function LogoutBtn() {
   const handleClick = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('thisUser');
+    localStorage.removeItem('cart');
     navigate('/');
   };
 

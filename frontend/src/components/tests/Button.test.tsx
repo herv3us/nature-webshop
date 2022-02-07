@@ -1,6 +1,6 @@
 import Button from '../Button';
 import { render, screen } from '@testing-library/react';
-import { singleProduct, products } from '../../dummyData/products';
+import { singleProduct, cartProduct } from '../../dummyData/products';
 
 const setUserCartMock = jest.fn();
 
@@ -9,7 +9,7 @@ describe('Tests for Button-component', () => {
     render(
       <Button
         product={singleProduct}
-        userCart={products}
+        userCart={cartProduct}
         setUserCart={setUserCartMock}
       />
     );

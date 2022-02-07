@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Product } from './../models/Product';
+import { getTokenFromLocalStorage } from '../services/localStorageService';
 import ProductPopup from './ProductPopup';
 import Button from './Button';
 
@@ -12,16 +13,19 @@ interface Props {
 
 function ProductCardMini(props: Props) {
   const { product, userCart, setUserCart } = props;
+  const token = getTokenFromLocalStorage();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <WrapperLi onClick={() => setIsOpen(true)}>
-        <Button
-          product={product}
-          userCart={userCart}
-          setUserCart={setUserCart}
-        />
+        {token ? (
+          <Button
+            product={product}
+            userCart={userCart}
+            setUserCart={setUserCart}
+          />
+        ) : null}
         <Image src={product.imgUrl} alt={product.title} />
         <Wrapper>
           <h2>{product.title}</h2>

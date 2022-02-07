@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { login } from '../services/loginServices';
 import {
   saveTokenInLocalStorage,
@@ -12,11 +12,13 @@ import {
   Button,
   Message,
 } from '../styling/LoginForm.styled';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setUsername('');
@@ -43,7 +45,7 @@ function LoginForm() {
     } else if (data.success) {
       saveTokenInLocalStorage(data.token);
       saveUserInLocalStorage(data.user);
-      window.location.reload();
+      navigate('/');
     }
   };
 

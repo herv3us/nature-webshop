@@ -5,5 +5,6 @@ export interface Product {
     description: string,
     imgUrl: string,
     price: number,
-    stock: number
+    stock: number,
+    inCart: number
 }
