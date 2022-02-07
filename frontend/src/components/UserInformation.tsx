@@ -1,7 +1,7 @@
 import { getUserFromLocalStorage } from '../services/localStorageService';
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import LogoutBtn from './LogoutBtn';
+import { Wrapper, Content } from '../styling/MyPage.styled';
+import styled from 'styled-components';
 
 function UserInformation() {
   const user = getUserFromLocalStorage();
@@ -20,9 +20,8 @@ function UserInformation() {
   }, []);
 
   return (
-    <Wrapper>
+    <InfoWrapper>
       <Content>
-        <LogoutBtn />
         <h2>
           {welcomeMessage} {user?.firstName}!
         </h2>
@@ -41,35 +40,16 @@ function UserInformation() {
           <p>Stad: {user?.city}</p>
         </UserInfo>
       </Content>
-    </Wrapper>
+    </InfoWrapper>
   );
 }
 
 export default UserInformation;
 
-const Wrapper = styled.div`
-  color: #353535;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* margin: 3rem auto; */
-  max-width: 550px;
-
-  h2 {
-    font-size: 1.8rem;
-    margin: 10px 0 5px;
-  }
-
+const InfoWrapper = styled(Wrapper)`
   p {
     width: 80%;
   }
-`;
-
-const Content = styled.div`
-  position: relative;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  padding: 3rem;
 `;
 
 const UserInfo = styled.div`

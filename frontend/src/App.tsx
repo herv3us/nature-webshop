@@ -14,6 +14,7 @@ function App() {
   const [backpacks, setBackpacks] = useState<[] | Product[]>([]);
   const [jackets, setJackets] = useState<[] | Product[]>([]);
   const [shoes, setShoes] = useState<[] | Product[]>([]);
+  const [userCart, setUserCart] = useState<[] | Product[]>([]);
   const [searchString, setSearchString] = useState('');
   const [searchParam] = useState(['title', 'description']);
   const allBackpacks: Product[] = [];
@@ -68,10 +69,11 @@ function App() {
                 products={products}
                 setProducts={setProducts}
                 search={search}
+                userCart={userCart}
+                setUserCart={setUserCart}
               />
             }
           />
-          <Route path="/login" element={<LoginPage />} />
           <Route
             path="/backpack"
             element={
@@ -79,6 +81,8 @@ function App() {
                 src={srcVideo[1]}
                 products={backpacks}
                 search={search}
+                userCart={userCart}
+                setUserCart={setUserCart}
               />
             }
           />
@@ -89,15 +93,24 @@ function App() {
                 src={srcVideo[3]}
                 products={jackets}
                 search={search}
+                userCart={userCart}
+                setUserCart={setUserCart}
               />
             }
           />
           <Route
             path="/shoes"
             element={
-              <ShoesPage src={srcVideo[4]} products={shoes} search={search} />
+              <ShoesPage
+                src={srcVideo[4]}
+                products={shoes}
+                search={search}
+                userCart={userCart}
+                setUserCart={setUserCart}
+              />
             }
           />
+          <Route path="/mypage" element={<LoginPage />} />
         </Routes>
       </Wrapper>
     </Router>

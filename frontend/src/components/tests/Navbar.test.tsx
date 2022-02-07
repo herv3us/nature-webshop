@@ -1,5 +1,6 @@
 import Navbar from '../Navbar';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const mockNavigator = jest.fn();
 const setSearchStringMock = jest.fn();
@@ -61,5 +62,29 @@ describe('Tests for Navbar', () => {
     );
     const shoelink = screen.getByText(/skor/i);
     expect(shoelink).toBeInTheDocument();
+  });
+
+  it('navigate to "My Page" when clicking the My Page-link', async () => {
+    render(
+      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
+    );
+    const myPage = screen.getByText(/Mina sidor/i);
+    userEvent.click(myPage);
+
+    await waitFor(() => {
+      expect(mockNavigator).toHaveBeenCalledWith('/mypage');
+    });
+  });
+
+  it('navigate to jacketpage when clicking the link', async () => {
+    render(
+      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
+    );
+    const jackets = screen.getByText(/Jackor/i);
+    userEvent.click(jackets);
+
+    await waitFor(() => {
+      expect(mockNavigator).toHaveBeenCalledWith('/jacket');
+    });
   });
 });

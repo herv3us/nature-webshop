@@ -1,19 +1,27 @@
 import { useState } from 'react';
 import { Product } from './../models/Product';
-import styled from 'styled-components';
 import ProductPopup from './ProductPopup';
+import Button from './Button';
 
+import styled from 'styled-components';
 interface Props {
   product: Product;
+  userCart: Product[];
+  setUserCart: Function;
 }
 
 function ProductCardMini(props: Props) {
-  const { product } = props;
+  const { product, userCart, setUserCart } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <WrapperLi onClick={() => setIsOpen(true)}>
+        <Button
+          product={product}
+          userCart={userCart}
+          setUserCart={setUserCart}
+        />
         <Image src={product.imgUrl} alt={product.title} />
         <Wrapper>
           <h2>{product.title}</h2>

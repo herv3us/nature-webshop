@@ -12,10 +12,12 @@ interface Props {
   products: Product[];
   setProducts: Function;
   search: Function;
+  userCart: Product[];
+  setUserCart: Function;
 }
 
 function StartPage(props: Props) {
-  const { src, products, setProducts, search } = props;
+  const { src, products, setProducts, search, userCart, setUserCart } = props;
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,12 @@ function StartPage(props: Props) {
       ) : (
         <WrapperUl>
           {search(products).map((product: any) => (
-            <ProductCardMini product={product} key={product.id} />
+            <ProductCardMini
+              product={product}
+              key={product.id}
+              userCart={userCart}
+              setUserCart={setUserCart}
+            />
           ))}
         </WrapperUl>
       )}

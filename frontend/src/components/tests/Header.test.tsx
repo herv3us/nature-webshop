@@ -24,7 +24,7 @@ describe('Tests for Header', () => {
     expect(video).toBeInTheDocument();
   });
 
-  it('render a welcome-heading', () => {
+  it('render a heading', () => {
     render(
       <Header
         src={'/images/someVideo.mp4'}

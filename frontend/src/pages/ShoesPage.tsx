@@ -8,17 +8,24 @@ interface Props {
   src: string;
   products: Product[];
   search: Function;
+  userCart: Product[];
+  setUserCart: Function;
 }
 
 function ShoesPage(props: Props) {
-  const { src, products, search } = props;
+  const { src, products, search, userCart, setUserCart } = props;
 
   return (
     <Wrapper>
       <Header src={src} title={'Cold and wet feet'} subtitle={'Never again.'} />
       <WrapperUl>
         {search(products)?.map((product: any) => (
-          <ProductCardMini product={product} key={product.id} />
+          <ProductCardMini
+            product={product}
+            key={product.id}
+            userCart={userCart}
+            setUserCart={setUserCart}
+          />
         ))}
       </WrapperUl>
     </Wrapper>

@@ -25,8 +25,12 @@ function Navbar(props: Props) {
         <li onClick={() => navigate('/jacket')}>Jackor</li>
         <li onClick={() => navigate('/shoes')}>Skor</li>
         <li onClick={() => navigate('/backpack')}>Ryggsäckar</li>
-        <li onClick={() => navigate('/login')}>Mina sidor</li>
-        <li onClick={() => navigate('/cart')} title="Kundkorg">
+        <li onClick={() => navigate('/mypage')}>Mina sidor</li>
+        <li
+          onClick={() => navigate('/mypage')}
+          title="Varukorg"
+          className="cart"
+        >
           🛒
         </li>
       </StyledUl>
@@ -82,5 +86,9 @@ const StyledUl = styled.ul`
     &:hover {
       border-bottom: 1px solid #353535c1;
     }
+  }
+  .cart:hover {
+    border-bottom: 1px solid transparent;
+    transform: scale(1.07);
   }
 `;

@@ -8,17 +8,24 @@ interface Props {
   src: string;
   products: Product[];
   search: Function;
+  userCart: Product[];
+  setUserCart: Function;
 }
 
 function BackpackPage(props: Props) {
-  const { src, products, search } = props;
+  const { src, products, search, userCart, setUserCart } = props;
 
   return (
     <Wrapper>
       <Header src={src} title={'Any backpack'} subtitle={'For every moment.'} />
       <WrapperUl>
         {search(products)?.map((product: Product) => (
-          <ProductCardMini product={product} key={product.id} />
+          <ProductCardMini
+            product={product}
+            key={product.id}
+            userCart={userCart}
+            setUserCart={setUserCart}
+          />
         ))}
       </WrapperUl>
     </Wrapper>
