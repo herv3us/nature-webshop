@@ -8,12 +8,10 @@ import styled from 'styled-components';
 interface Props {
   src: string;
   search: Function;
-  userCart: Product[];
-  setUserCart: Function;
 }
 
 function BackpackPage(props: Props) {
-  const { src, search, userCart, setUserCart } = props;
+  const { src, search } = props;
   const allBackpacks = getBackpacksFromLocalStorage();
 
   return (
@@ -21,12 +19,7 @@ function BackpackPage(props: Props) {
       <Header src={src} title={'Any backpack'} subtitle={'For every moment.'} />
       <WrapperUl>
         {search(allBackpacks)?.map((product: Product) => (
-          <ProductCardMini
-            product={product}
-            key={product.id}
-            userCart={userCart}
-            setUserCart={setUserCart}
-          />
+          <ProductCardMini product={product} key={product.id} />
         ))}
       </WrapperUl>
     </Wrapper>

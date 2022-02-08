@@ -20,8 +20,7 @@ function Cart() {
   };
 
   const countValue = (cart: Product[]) => {
-    console.log(cart);
-    if (cart.length > 0) {
+    if (cart?.length > 0) {
       cart?.map((item) => {
         count.push(item.price);
       });
@@ -40,9 +39,10 @@ function Cart() {
         <ul>
           {cart && cart?.length > 0 ? (
             cart?.map((cartItem) => (
-              <div>
-                <CartProductInfo key={cartItem.id} product={cartItem} />
-              </div>
+              <CartProductInfo
+                key={Math.floor(Math.random() * 1000)}
+                product={cartItem}
+              />
             ))
           ) : (
             <p>Din varukorg är för närvarande tom.</p>

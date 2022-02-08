@@ -7,12 +7,10 @@ import styled from 'styled-components';
 interface Props {
   src: string;
   search: Function;
-  userCart: Product[];
-  setUserCart: Function;
 }
 
 function JacketPage(props: Props) {
-  const { src, search, userCart, setUserCart } = props;
+  const { src, search } = props;
   const allJackets = getJacketsFromLocalStorage();
 
   return (
@@ -20,12 +18,7 @@ function JacketPage(props: Props) {
       <Header src={src} title={'Keeps you warm'} subtitle={'Every minute.'} />
       <WrapperUl>
         {search(allJackets)?.map((product: Product) => (
-          <ProductCardMini
-            product={product}
-            key={product.id}
-            userCart={userCart}
-            setUserCart={setUserCart}
-          />
+          <ProductCardMini product={product} key={product.id} />
         ))}
       </WrapperUl>
     </Wrapper>

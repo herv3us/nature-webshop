@@ -5,7 +5,6 @@ import {
   saveUserInLocalStorage,
   saveTokenInLocalStorage,
 } from '../../services/localStorageService';
-import { wait } from '@testing-library/user-event/dist/utils';
 
 let successfulFetchResponse = {
   success: true,
@@ -19,11 +18,6 @@ let successfulFetchResponse = {
     zipCode: 232,
     city: 'Somewhere',
   },
-};
-
-let unsuccessfulFetchResponse = {
-  success: false,
-  error: 'Error message',
 };
 
 jest.mock('../../services/localStorageService', () => {

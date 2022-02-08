@@ -7,25 +7,17 @@ import Button from './Button';
 import styled from 'styled-components';
 interface Props {
   product: Product;
-  userCart: Product[];
-  setUserCart: Function;
 }
 
 function ProductCardMini(props: Props) {
-  const { product, userCart, setUserCart } = props;
+  const { product } = props;
   const token = getTokenFromLocalStorage();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
       <WrapperLi onClick={() => setIsOpen(true)}>
-        {token ? (
-          <Button
-            product={product}
-            userCart={userCart}
-            setUserCart={setUserCart}
-          />
-        ) : null}
+        {token ? <Button product={product} /> : null}
         <Image src={product.imgUrl} alt={product.title} />
         <Wrapper>
           <h2>{product.title}</h2>

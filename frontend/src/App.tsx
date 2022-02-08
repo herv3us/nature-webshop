@@ -16,7 +16,6 @@ import styled from 'styled-components';
 
 function App() {
   const [products, setProducts] = useState<[] | [Product]>([]);
-  const [userCart, setUserCart] = useState<[] | Product[]>([]);
   const [searchString, setSearchString] = useState('');
   const [searchParam] = useState(['title', 'description']);
   const allBackpacks: Product[] = [];
@@ -71,43 +70,20 @@ function App() {
                 products={products}
                 setProducts={setProducts}
                 search={search}
-                userCart={userCart}
-                setUserCart={setUserCart}
               />
             }
           />
           <Route
             path="/backpack"
-            element={
-              <BackpackPage
-                src={srcVideo[1]}
-                search={search}
-                userCart={userCart}
-                setUserCart={setUserCart}
-              />
-            }
+            element={<BackpackPage src={srcVideo[1]} search={search} />}
           />
           <Route
             path="/jacket"
-            element={
-              <JacketPage
-                src={srcVideo[3]}
-                search={search}
-                userCart={userCart}
-                setUserCart={setUserCart}
-              />
-            }
+            element={<JacketPage src={srcVideo[3]} search={search} />}
           />
           <Route
             path="/shoes"
-            element={
-              <ShoesPage
-                src={srcVideo[4]}
-                search={search}
-                userCart={userCart}
-                setUserCart={setUserCart}
-              />
-            }
+            element={<ShoesPage src={srcVideo[4]} search={search} />}
           />
           <Route path="/mypage" element={<LoginPage />} />
         </Routes>

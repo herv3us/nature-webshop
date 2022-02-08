@@ -2,20 +2,19 @@ import { useEffect, useState } from 'react';
 import {
   getUserFromLocalStorage,
   saveCartToLocalStorage,
+  getCartFromLocalStorage,
 } from '../services/localStorageService';
 import { Product } from '../models/Product';
 import styled from 'styled-components';
 
 interface Props {
   product: Product;
-  userCart: Product[];
-  setUserCart: Function;
 }
 
 function Button(props: Props) {
-  const { product, userCart, setUserCart } = props;
-  const user = getUserFromLocalStorage();
+  const { product } = props;
   const [buttonText, setButtonText] = useState('');
+  const user = getUserFromLocalStorage();
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -26,30 +25,15 @@ function Button(props: Props) {
   }, []);
 
   const addToCart = () => {
-    if (userCart.length > 0) {
-      userCart.map((item) => {
-        if (item.id === product.id) {
-          const thisItem = { ...item };
-          if (item.inCart > 0) {
-            item.inCart++;
-          } else {
-            thisItem.inCart = +1 as number;
-          }
-          const updatedProduct = { ...thisItem };
+    const cart = getCartFromLocalStorage();
 
-          const filterdArray = userCart.filter(
-            (item) => item.id !== product.id
-          );
-          const newCart = [updatedProduct, ...filterdArray];
-          //   console.log(newCart);
-          setUserCart(newCart);
-        } else {
-          const updateCart = [product, ...userCart];
-          setUserCart(updateCart);
-        }
-      });
-    } else if (userCart.length === 0) {
-      setUserCart([product]);
+    if (cart && cart?.length > 0) {
+      console.log('Hej');
+      const newCart = [product, ...cart];
+      saveCartToLocalStorage(newCart);
+    } else {
+      console.log('sparar till localstorage');
+      saveCartToLocalStorage([product]);
     }
   };
 
@@ -57,17 +41,12 @@ function Button(props: Props) {
     e.stopPropagation();
     e.preventDefault();
     if (user?.role === 'customer') {
-      console.log('Im a user');
       addToCart();
     } else if (user?.role === 'admin') {
       console.log('you want to edit this product');
       // navigera admin till en sida där man kan uppdatera produkten
     }
   };
-
-  useEffect(() => {
-    saveCartToLocalStorage(userCart as Product[]);
-  }, [userCart]);
 
   return <StyledBtn onClick={(e) => handleClick(e)}>{buttonText}</StyledBtn>;
 }

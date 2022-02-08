@@ -1,17 +1,9 @@
 import Button from '../Button';
 import { render, screen } from '@testing-library/react';
-import { singleProduct, cartProduct } from '../../dummyData/products';
-
-const setUserCartMock = jest.fn();
+import { singleProduct } from '../../dummyData/products';
 
 describe('Tests for Button-component', () => {
   it('render without crashing', () => {
-    render(
-      <Button
-        product={singleProduct}
-        userCart={cartProduct}
-        setUserCart={setUserCartMock}
-      />
-    );
+    render(<Button product={singleProduct} />);
   });
 });

@@ -23,7 +23,7 @@ export const saveCartToLocalStorage = (products: Product[]): void => {
   localStorage.setItem('cart', JSON.stringify(products))
 }
 
-export const getCartFromLocalStorage = (): Product[] | null => {
+export const getCartFromLocalStorage = (): Product[] | null =>  {
   const productsInCart = localStorage.getItem('cart')
   return productsInCart ? JSON.parse(productsInCart) : null
 }
