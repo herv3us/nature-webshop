@@ -1,5 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import {
+  saveBackpacksToLocalStorage,
+  saveJacketsToLocalStorage,
+  saveShoesToLocalStorage,
+} from './services/localStorageService';
 import { Product } from './models/Product';
 import StartPage from './pages/StartPage';
 import Navbar from './components/Navbar';
@@ -11,9 +16,6 @@ import styled from 'styled-components';
 
 function App() {
   const [products, setProducts] = useState<[] | [Product]>([]);
-  const [backpacks, setBackpacks] = useState<[] | Product[]>([]);
-  const [jackets, setJackets] = useState<[] | Product[]>([]);
-  const [shoes, setShoes] = useState<[] | Product[]>([]);
   const [userCart, setUserCart] = useState<[] | Product[]>([]);
   const [searchString, setSearchString] = useState('');
   const [searchParam] = useState(['title', 'description']);
@@ -50,9 +52,9 @@ function App() {
       } else if (product.category === 'shoes') {
         allShoes.push(product);
       }
-      setJackets(allJackets);
-      setBackpacks(allBackpacks);
-      setShoes(allShoes);
+      saveJacketsToLocalStorage(allJackets);
+      saveBackpacksToLocalStorage(allBackpacks);
+      saveShoesToLocalStorage(allShoes);
     });
   }, [products]);
 
@@ -79,7 +81,6 @@ function App() {
             element={
               <BackpackPage
                 src={srcVideo[1]}
-                products={backpacks}
                 search={search}
                 userCart={userCart}
                 setUserCart={setUserCart}
@@ -91,7 +92,6 @@ function App() {
             element={
               <JacketPage
                 src={srcVideo[3]}
-                products={jackets}
                 search={search}
                 userCart={userCart}
                 setUserCart={setUserCart}
@@ -103,7 +103,6 @@ function App() {
             element={
               <ShoesPage
                 src={srcVideo[4]}
-                products={shoes}
                 search={search}
                 userCart={userCart}
                 setUserCart={setUserCart}

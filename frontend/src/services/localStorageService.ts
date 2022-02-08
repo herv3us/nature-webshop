@@ -27,3 +27,30 @@ export const getCartFromLocalStorage = (): Product[] | null => {
   const productsInCart = localStorage.getItem('cart')
   return productsInCart ? JSON.parse(productsInCart) : null
 }
+
+export const saveBackpacksToLocalStorage = (backpacks: Product[]): void=> {
+  localStorage.setItem('backpacks', JSON.stringify(backpacks))
+}
+
+export const saveJacketsToLocalStorage = (jackets: Product[]): void=> {
+ localStorage.setItem('jackets', JSON.stringify(jackets))
+}
+
+export const saveShoesToLocalStorage = (shoes: Product[]): void=> {
+  localStorage.setItem('shoes', JSON.stringify(shoes))
+}
+
+export const getBackpacksFromLocalStorage = (): Product[] |null => {
+  const backpacks = localStorage.getItem('backpacks')
+  return backpacks ? JSON.parse(backpacks) : null
+}
+
+export const getJacketsFromLocalStorage = (): Product[] |null => {
+  const jackets = localStorage.getItem('jackets')
+  return jackets ? JSON.parse(jackets) : null
+}
+
+export const getShoesFromLocalStorage = (): Product[] |null => {
+  const shoes = localStorage.getItem('shoes')
+  return shoes ? JSON.parse(shoes) : null
+}

@@ -1,4 +1,5 @@
 import { Product } from './../models/Product';
+import { getShoesFromLocalStorage } from '../services/localStorageService';
 import Header from '../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
 import { WrapperUl } from '../styling/WrapperUl.styled';
@@ -6,20 +7,20 @@ import styled from 'styled-components';
 
 interface Props {
   src: string;
-  products: Product[];
   search: Function;
   userCart: Product[];
   setUserCart: Function;
 }
 
 function ShoesPage(props: Props) {
-  const { src, products, search, userCart, setUserCart } = props;
+  const { src, search, userCart, setUserCart } = props;
+  const allShoes = getShoesFromLocalStorage();
 
   return (
     <Wrapper>
       <Header src={src} title={'Cold and wet feet'} subtitle={'Never again.'} />
       <WrapperUl>
-        {search(products)?.map((product: any) => (
+        {search(allShoes)?.map((product: any) => (
           <ProductCardMini
             product={product}
             key={product.id}

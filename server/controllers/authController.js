@@ -3,7 +3,6 @@ const User = require('../models/userModel');
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log(username, password);
 
     if (!username || !password) {
       return;

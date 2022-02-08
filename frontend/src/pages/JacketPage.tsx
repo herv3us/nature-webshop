@@ -1,24 +1,25 @@
 import { Product } from './../models/Product';
+import { getJacketsFromLocalStorage } from '../services/localStorageService';
 import Header from '../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
 import { WrapperUl } from '../styling/WrapperUl.styled';
 import styled from 'styled-components';
 interface Props {
   src: string;
-  products: Product[];
   search: Function;
   userCart: Product[];
   setUserCart: Function;
 }
 
 function JacketPage(props: Props) {
-  const { src, products, search, userCart, setUserCart } = props;
+  const { src, search, userCart, setUserCart } = props;
+  const allJackets = getJacketsFromLocalStorage();
 
   return (
     <Wrapper>
       <Header src={src} title={'Keeps you warm'} subtitle={'Every minute.'} />
       <WrapperUl>
-        {search(products)?.map((product: Product) => (
+        {search(allJackets)?.map((product: Product) => (
           <ProductCardMini
             product={product}
             key={product.id}
