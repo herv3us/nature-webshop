@@ -24,16 +24,51 @@ function Button(props: Props) {
     }
   }, []);
 
-  const addToCart = () => {
+  const addToCart = (product: Product) => {
     const cart = getCartFromLocalStorage();
 
     if (cart && cart?.length > 0) {
-      console.log('Hej');
-      const newCart = [product, ...cart];
-      saveCartToLocalStorage(newCart);
+      //find out if the product even exist in the cart
+      const foundProduct = cart?.find((item) => item.id === product.id);
+      if (foundProduct) {
+        foundProduct.inCart++;
+        console.log(foundProduct);
+
+        // find indexof the product and remove item from localStorage
+        const i = cart.findIndex((item) => item.title === product.title);
+        if (i !== -1) {
+          cart.splice(i, 1);
+        }
+        saveCartToLocalStorage(cart);
+
+        console.log([foundProduct, ...cart]);
+        //set a new localStorage with the updated pruduct.
+        saveCartToLocalStorage([foundProduct, ...cart]);
+      } else {
+        const newProduct = {
+          id: product.id,
+          title: product.title,
+          category: product.category,
+          description: product.description,
+          imgUrl: product.imgUrl,
+          price: product.price,
+          stock: product.stock,
+          inCart: 1,
+        };
+        saveCartToLocalStorage([newProduct, ...cart]);
+      }
     } else {
-      console.log('sparar till localstorage');
-      saveCartToLocalStorage([product]);
+      const newProduct = {
+        id: product.id,
+        title: product.title,
+        category: product.category,
+        description: product.description,
+        imgUrl: product.imgUrl,
+        price: product.price,
+        stock: product.stock,
+        inCart: 1,
+      };
+      saveCartToLocalStorage([newProduct]);
     }
   };
 
@@ -41,7 +76,7 @@ function Button(props: Props) {
     e.stopPropagation();
     e.preventDefault();
     if (user?.role === 'customer') {
-      addToCart();
+      addToCart(product);
     } else if (user?.role === 'admin') {
       console.log('you want to edit this product');
       // navigera admin till en sida där man kan uppdatera produkten

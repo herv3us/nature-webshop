@@ -11,6 +11,7 @@ function CartProductInfo(props: Props) {
     <li>
       <h4>{product.title}</h4>
       <p>{product.price} kr</p>
+      <p>{product.inCart} ligger i din varukorg</p>
     </li>
   );
 }
