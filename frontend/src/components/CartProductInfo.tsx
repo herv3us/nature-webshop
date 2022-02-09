@@ -65,6 +65,22 @@ function CartProductInfo(props: Props) {
     }
   };
 
+  const deleteProduct = (e: any, product: Product) => {
+    e.preventDefault();
+    const foundProduct = cart?.find(
+      (inCartItem) => inCartItem.id === product.id
+    );
+
+    if (cart && cart.length >= 1) {
+      const i = cart?.findIndex((item) => item.title === product.title);
+      if (i !== -1) {
+        cart.splice(i, 1);
+      }
+      setUpdateCart([...cart]);
+      setProductsInCart([...cart]);
+    }
+  };
+
   useEffect(() => {
     saveCartToLocalStorage(updateCart as Product[]);
     setThisProduct(product);
@@ -72,6 +88,7 @@ function CartProductInfo(props: Props) {
 
   return (
     <StyledLi>
+      <DeleteBtn onClick={(e) => deleteProduct(e, product)}>X</DeleteBtn>
       <Wrapper>
         <Image src={thisProduct.imgUrl} alt={thisProduct.title} />
         <h4>{thisProduct.title}</h4>
@@ -107,6 +124,7 @@ const StyledLi = styled.li`
   margin-bottom: 10px;
   padding: 2rem;
   border-radius: 0.2rem;
+  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -124,10 +142,16 @@ const AddMoreInCart = styled.div`
   }
 
   button {
+    cursor: pointer;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 30%;
+    border: none;
     text-align: center;
+
+    &:disabled {
+      cursor: auto;
+    }
   }
 `;
 
@@ -135,6 +159,30 @@ const Image = styled.img`
   width: 70px;
   height: 70px;
   object-fit: cover;
-  border-radius: 0.6rem;
+  border-radius: 0.4rem;
   margin: 0.4rem;
+`;
+
+const DeleteBtn = styled.button`
+  cursor: pointer;
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  font-weight: bold;
+  color: #c04e4e;
+  border: none;
+  background-color: #ddd;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  text-align: center;
+
+  @media (max-width: 655px) {
+    top: -17.5rem;
+  }
+
+  &:hover {
+    color: #eee;
+    background-color: #c04e4e;
+  }
 `;
