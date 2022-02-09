@@ -24,16 +24,16 @@ function Button(props: Props) {
     }
   }, []);
 
+  // function that adds the product to cart.
+  // It also checks if the products is already in the
+  // cart, and then updates it's inCart value
   const addToCart = (product: Product) => {
     const cart = getCartFromLocalStorage();
-
     if (cart && cart?.length > 0) {
       //find out if the product even exist in the cart
       const foundProduct = cart?.find((item) => item.id === product.id);
       if (foundProduct) {
         foundProduct.inCart++;
-        console.log(foundProduct);
-
         // find indexof the product and remove item from localStorage
         const i = cart.findIndex((item) => item.title === product.title);
         if (i !== -1) {
@@ -41,9 +41,8 @@ function Button(props: Props) {
         }
         saveCartToLocalStorage(cart);
 
-        console.log([foundProduct, ...cart]);
         //set a new localStorage with the updated pruduct.
-        saveCartToLocalStorage([foundProduct, ...cart]);
+        saveCartToLocalStorage([...cart, foundProduct]);
       } else {
         const newProduct = {
           id: product.id,
@@ -55,7 +54,7 @@ function Button(props: Props) {
           stock: product.stock,
           inCart: 1,
         };
-        saveCartToLocalStorage([newProduct, ...cart]);
+        saveCartToLocalStorage([...cart, newProduct]);
       }
     } else {
       const newProduct = {

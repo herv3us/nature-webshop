@@ -34,3 +34,32 @@ export const Content = styled.div`
     padding: 1.6rem;
   }
 `;
+
+export const StyledUl = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  background-color: #eee;
+  padding: 2rem;
+  border-radius: 0.3rem;
+`;
+
+export const PayButton = styled.button`
+  cursor: pointer;
+  background-color: #c04e4e;
+  border: none;
+  border-radius: 3px;
+  color: #eee;
+  font-weight: bold;
+  padding: 0.2rem 0.9rem;
+  letter-spacing: 1.1px;
+  z-index: 10;
+  transition: ease all 0.5s;
+  position: absolute;
+  top: 35px;
+  right: 0;
+
+  &:hover {
+    background-color: #9c3333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+`;
