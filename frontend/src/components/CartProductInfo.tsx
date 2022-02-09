@@ -28,7 +28,31 @@ function CartProductInfo(props: Props) {
         inCart: (foundProduct.inCart - 1) as number,
       };
 
-      if (cart && cart?.length > 1) {
+      if (cart && cart?.length >= 1) {
+        const i = cart?.findIndex((item) => item.title === product.title);
+        if (i !== -1) {
+          cart.splice(i, 1);
+        }
+        setUpdateCart([...cart, updateProduct]);
+        setProductsInCart([...cart, updateProduct]);
+      } else {
+        setUpdateCart(null);
+      }
+    }
+  };
+
+  const increase = (e: any, product: Product) => {
+    e.preventDefault();
+    const foundProduct = cart?.find(
+      (inCartItem) => inCartItem.id === product.id
+    );
+    if (foundProduct) {
+      const updateProduct = {
+        ...foundProduct,
+        inCart: (foundProduct.inCart + 1) as number,
+      };
+
+      if (cart && cart?.length >= 1) {
         const i = cart?.findIndex((item) => item.title === product.title);
         if (i !== -1) {
           cart.splice(i, 1);
@@ -62,7 +86,12 @@ function CartProductInfo(props: Props) {
             -
           </button>
           <p>{thisProduct.inCart}</p>
-          <button>+</button>
+          <button
+            onClick={(e) => increase(e, product)}
+            disabled={thisProduct.inCart >= product.stock}
+          >
+            +
+          </button>
         </AddMoreInCart>
       </Wrapper>
     </StyledLi>
@@ -77,7 +106,7 @@ const StyledLi = styled.li`
   background-color: #fff;
   margin-bottom: 10px;
   padding: 2rem;
-  border-radius: 0.4rem;
+  border-radius: 0.2rem;
 `;
 
 const Wrapper = styled.div`
@@ -103,8 +132,8 @@ const AddMoreInCart = styled.div`
 `;
 
 const Image = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 0.6rem;
   margin: 0.4rem;

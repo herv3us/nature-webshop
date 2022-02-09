@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 550px;
+  width: 100%;
 
   h2 {
     font-size: 1.8rem;
@@ -37,10 +38,9 @@ export const Content = styled.div`
 
 export const StyledUl = styled.ul`
   list-style-type: none;
-  padding: 0;
   background-color: #eee;
-  padding: 2rem;
-  border-radius: 0.3rem;
+  padding: 1.3rem;
+  border-radius: 0.2rem;
 `;
 
 export const PayButton = styled.button`

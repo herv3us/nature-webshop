@@ -33,16 +33,18 @@ function Button(props: Props) {
       //find out if the product even exist in the cart
       const foundProduct = cart?.find((item) => item.id === product.id);
       if (foundProduct) {
-        foundProduct.inCart++;
-        // find indexof the product and remove item from localStorage
-        const i = cart.findIndex((item) => item.title === product.title);
-        if (i !== -1) {
-          cart.splice(i, 1);
-        }
-        saveCartToLocalStorage(cart);
+        if (foundProduct.inCart < foundProduct.stock) {
+          foundProduct.inCart++;
+          // find indexof the product and remove item from localStorage
+          const i = cart.findIndex((item) => item.title === product.title);
+          if (i !== -1) {
+            cart.splice(i, 1);
+          }
+          saveCartToLocalStorage(cart);
 
-        //set a new localStorage with the updated pruduct.
-        saveCartToLocalStorage([...cart, foundProduct]);
+          //set a new localStorage with the updated pruduct.
+          saveCartToLocalStorage([...cart, foundProduct]);
+        }
       } else {
         const newProduct = {
           id: product.id,
@@ -82,7 +84,11 @@ function Button(props: Props) {
     }
   };
 
-  return <StyledBtn onClick={(e) => handleClick(e)}>{buttonText}</StyledBtn>;
+  return (
+    <StyledBtn onClick={(e) => handleClick(e)} disabled={product.stock === 0}>
+      {buttonText}
+    </StyledBtn>
+  );
 }
 
 export default Button;
