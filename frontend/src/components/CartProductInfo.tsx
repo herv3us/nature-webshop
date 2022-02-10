@@ -75,10 +75,13 @@ function CartProductInfo(props: Props) {
       <DeleteBtn onClick={(e) => deleteProduct(e, product)}>X</DeleteBtn>
       <Wrapper>
         <Image src={thisProduct.imgUrl} alt={thisProduct.title} />
-        <h4>{thisProduct.title}</h4>
+        <TitleWrapper>
+          <h4>{thisProduct.title}</h4>
+          <p>{thisProduct.price * thisProduct.inCart} kr</p>
+        </TitleWrapper>
       </Wrapper>
       <Wrapper>
-        <p>{thisProduct.price * thisProduct.inCart} kr</p>
+        <p>Kvar i lager: {thisProduct.stock}</p>
         <AddMoreInCart>
           <button
             onClick={(e) => decrease(e, product)}
@@ -115,6 +118,18 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+
+  p {
+    margin: 3px 0 0;
+  }
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 `;
 
 const AddMoreInCart = styled.div`
