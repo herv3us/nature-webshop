@@ -23,21 +23,15 @@ function CartProductInfo(props: Props) {
       (inCartItem) => inCartItem.id === product.id
     );
     if (foundProduct) {
-      const updateProduct = {
-        ...foundProduct,
-        inCart: (foundProduct.inCart - 1) as number,
-      };
-
-      if (cart && cart?.length >= 1) {
-        const i = cart?.findIndex((item) => item.title === product.title);
-        if (i !== -1) {
-          cart.splice(i, 1);
+      const updateCart = cart?.map((a) => {
+        const item = { ...a };
+        if (a.id === foundProduct.id) {
+          item.inCart--;
         }
-        setUpdateCart([...cart, updateProduct]);
-        setProductsInCart([...cart, updateProduct]);
-      } else {
-        setUpdateCart(null);
-      }
+        return item;
+      });
+      setUpdateCart(updateCart);
+      setProductsInCart(updateCart);
     }
   };
 
@@ -47,21 +41,15 @@ function CartProductInfo(props: Props) {
       (inCartItem) => inCartItem.id === product.id
     );
     if (foundProduct) {
-      const updateProduct = {
-        ...foundProduct,
-        inCart: (foundProduct.inCart + 1) as number,
-      };
-
-      if (cart && cart?.length >= 1) {
-        const i = cart?.findIndex((item) => item.title === product.title);
-        if (i !== -1) {
-          cart.splice(i, 1);
+      const updateCart = cart?.map((a) => {
+        const item = { ...a };
+        if (a.id === foundProduct.id) {
+          item.inCart++;
         }
-        setUpdateCart([...cart, updateProduct]);
-        setProductsInCart([...cart, updateProduct]);
-      } else {
-        setUpdateCart(null);
-      }
+        return item;
+      });
+      setUpdateCart(updateCart);
+      setProductsInCart(updateCart);
     }
   };
 

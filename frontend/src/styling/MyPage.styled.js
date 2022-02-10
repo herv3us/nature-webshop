@@ -45,10 +45,11 @@ export const StyledUl = styled.ul`
 
 export const PayButton = styled.button`
   cursor: pointer;
-  background-color: #c04e4e;
+  background-color: #476647e4;
+
   border: none;
   border-radius: 3px;
-  color: #eee;
+  color: #fff;
   font-weight: bold;
   padding: 0.2rem 0.9rem;
   letter-spacing: 1.1px;
@@ -59,7 +60,7 @@ export const PayButton = styled.button`
   right: 0;
 
   &:hover {
-    background-color: #9c3333;
+    background-color: grey;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 `;
