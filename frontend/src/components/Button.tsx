@@ -14,9 +14,11 @@ interface Props {
 function Button(props: Props) {
   const { product } = props;
   const [buttonText, setButtonText] = useState('');
-  const [isClicked, setIsClicked] = useState(false);
-  const [message, setMessage] = useState('');
   const user = getUserFromLocalStorage();
+
+  // const cart = getCartFromLocalStorage();
+
+  // const foundProduct = cart?.find((item) => item.id === product.id);
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -46,15 +48,6 @@ function Button(props: Props) {
 
           //set a new localStorage with the updated pruduct.
           saveCartToLocalStorage([...cart, foundProduct]);
-          setMessage('Produkten ligger nu i din kundkorg');
-          setTimeout(() => {
-            setMessage('');
-          }, 3000);
-        } else {
-          setMessage('För få i lager');
-          setTimeout(() => {
-            setMessage('');
-          }, 1500);
         }
       } else {
         const newProduct = {
@@ -89,10 +82,6 @@ function Button(props: Props) {
     e.preventDefault();
     if (user?.role === 'customer') {
       addToCart(product);
-      setIsClicked(true);
-      setTimeout(() => {
-        setIsClicked(false);
-      }, 1500);
     } else if (user?.role === 'admin') {
       console.log('you want to edit this product');
       // navigera admin till en sida där man kan uppdatera produkten
@@ -101,10 +90,7 @@ function Button(props: Props) {
 
   return (
     <div>
-      <StyledBtn onClick={(e) => handleClick(e)} disabled={product.stock === 0}>
-        {buttonText}
-      </StyledBtn>
-      {/* {isClicked ? <StyledSmall>{message}</StyledSmall> : null} */}
+      <StyledBtn onClick={(e) => handleClick(e)}>{buttonText}</StyledBtn>
     </div>
   );
 }
@@ -135,18 +121,4 @@ const StyledBtn = styled.button`
   &:active {
     transform: scale(0.96);
   }
-`;
-
-const StyledSmall = styled.small`
-  z-index: 50;
-  background-color: #eee;
-  font-weight: bold;
-  color: 353535;
-  max-width: 50%;
-  padding: 0.2rem;
-  border-radius: 1rem;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-align: center;
 `;

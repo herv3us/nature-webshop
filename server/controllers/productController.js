@@ -49,8 +49,32 @@ const createProduct = async (req, res, next) => {
   }
 };
 
+const updateProduct = async (req, res, next) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return next();
+    }
+
+    const updateProduct = await Product.findByIdAndUpdate(product, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      success: true,
+      product: updateProduct,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  updateProduct,
 };

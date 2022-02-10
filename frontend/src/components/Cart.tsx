@@ -1,14 +1,11 @@
 import CartProductInfo from './CartProductInfo';
 import { getCartFromLocalStorage } from '../services/localStorageService';
-import {
-  Wrapper,
-  Content,
-  StyledUl,
-  PayButton,
-} from '../styling/MyPage.styled';
+import { Wrapper, Content, StyledUl } from '../styling/MyPage.styled';
 import { useEffect, useState } from 'react';
 import { Product } from '../models/Product';
+import PayButton from './PayButton';
 import styled from 'styled-components';
+import CheckoutPopup from './CheckoutPopup';
 
 function Cart() {
   const [cartValue, setCartValue] = useState(0);
@@ -16,6 +13,7 @@ function Cart() {
     getCartFromLocalStorage() as Product[]
   );
   const [productsInCart, setProductsInCart] = useState<[] | Product[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
   const count: [number] = [0];
 
   const sum = () => {
@@ -48,6 +46,12 @@ function Cart() {
     <Wrapper>
       <Content>
         <h2>Din Varukorg</h2>
+        {isOpen ? (
+          <CheckoutPopup
+            setIsOpen={setIsOpen}
+            setProductsInCart={setProductsInCart}
+          />
+        ) : null}
         <StyledUl>
           {productsInCart && productsInCart?.length > 0 ? (
             productsInCart?.map((cartItem) => (
@@ -66,7 +70,10 @@ function Cart() {
         {productsInCart && productsInCart?.length > 0 ? (
           <TotalValueWrapper>
             <TotalValue>Totaltbelopp: {cartValue} kr</TotalValue>
-            <PayButton>Betala</PayButton>
+            <PayButton
+              setIsOpen={setIsOpen}
+              setProductsInCart={setProductsInCart}
+            />
           </TotalValueWrapper>
         ) : null}
       </Content>
