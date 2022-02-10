@@ -17,7 +17,6 @@ function Cart() {
     cart as Product[]
   );
   const [productsInCart, setProductsInCart] = useState<[] | Product[]>([]);
-
   const count: [number] = [0];
 
   const sum = () => {

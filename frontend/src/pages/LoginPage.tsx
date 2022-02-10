@@ -27,7 +27,7 @@ export default LoginPage;
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   max-width: 1400px;
   margin: 2.5rem auto;
   padding: 2rem;

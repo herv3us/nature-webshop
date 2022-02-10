@@ -55,10 +55,6 @@ function CartProductInfo(props: Props) {
 
   const deleteProduct = (e: any, product: Product) => {
     e.preventDefault();
-    const foundProduct = cart?.find(
-      (inCartItem) => inCartItem.id === product.id
-    );
-
     if (cart && cart.length >= 1) {
       const i = cart?.findIndex((item) => item.title === product.title);
       if (i !== -1) {
