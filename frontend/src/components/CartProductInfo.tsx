@@ -1,21 +1,17 @@
 import { Product } from '../models/Product';
 import styled from 'styled-components';
-import {
-  getCartFromLocalStorage,
-  saveCartToLocalStorage,
-} from '../services/localStorageService';
+import { saveCartToLocalStorage } from '../services/localStorageService';
 import { useEffect, useState } from 'react';
 interface Props {
   product: Product;
-  updateCart: Product[];
+  cart: Product[];
   setProductsInCart: Function;
-  setUpdateCart: Function;
+  setCart: Function;
 }
 
 function CartProductInfo(props: Props) {
-  const { product, updateCart, setProductsInCart, setUpdateCart } = props;
+  const { product, cart, setProductsInCart, setCart } = props;
   const [thisProduct, setThisProduct] = useState(product);
-  const cart = getCartFromLocalStorage();
 
   const decrease = (e: any, product: Product) => {
     e.preventDefault();
@@ -30,7 +26,7 @@ function CartProductInfo(props: Props) {
         }
         return item;
       });
-      setUpdateCart(updateCart);
+      setCart(updateCart);
       setProductsInCart(updateCart);
     }
   };
@@ -48,27 +44,31 @@ function CartProductInfo(props: Props) {
         }
         return item;
       });
-      setUpdateCart(updateCart);
+      setCart(updateCart);
       setProductsInCart(updateCart);
     }
   };
 
   const deleteProduct = (e: any, product: Product) => {
     e.preventDefault();
-    if (cart && cart.length >= 1) {
+    if (cart && cart.length > 1) {
       const i = cart?.findIndex((item) => item.title === product.title);
       if (i !== -1) {
         cart.splice(i, 1);
       }
-      setUpdateCart([...cart]);
+      setCart([...cart]);
       setProductsInCart([...cart]);
+    } else if (cart.length === 1) {
+      setCart(null);
+      setProductsInCart(null);
+      localStorage.removeItem('cart');
     }
   };
 
   useEffect(() => {
-    saveCartToLocalStorage(updateCart as Product[]);
+    saveCartToLocalStorage(cart as Product[]);
     setThisProduct(product);
-  }, [updateCart, setProductsInCart]);
+  }, [cart, setProductsInCart]);
 
   return (
     <StyledLi>

@@ -21,6 +21,10 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname + '../frontend/build/index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server up and running on port: ${PORT}`);
 });

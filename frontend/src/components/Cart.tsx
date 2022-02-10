@@ -11,10 +11,9 @@ import { Product } from '../models/Product';
 import styled from 'styled-components';
 
 function Cart() {
-  const cart = getCartFromLocalStorage();
   const [cartValue, setCartValue] = useState(0);
-  const [updateCart, setUpdateCart] = useState<[] | Product[]>(
-    cart as Product[]
+  const [cart, setCart] = useState<[] | Product[]>(
+    getCartFromLocalStorage() as Product[]
   );
   const [productsInCart, setProductsInCart] = useState<[] | Product[]>([]);
   const count: [number] = [0];
@@ -36,8 +35,8 @@ function Cart() {
   };
 
   useEffect(() => {
-    countTotalValue(updateCart);
-  }, [updateCart, setUpdateCart]);
+    countTotalValue(cart);
+  }, [cart, setCart]);
 
   useEffect(() => {
     if (cart) {
@@ -55,9 +54,9 @@ function Cart() {
               <CartProductInfo
                 key={cartItem.id}
                 product={cartItem}
-                updateCart={updateCart}
+                cart={cart}
                 setProductsInCart={setProductsInCart}
-                setUpdateCart={setUpdateCart}
+                setCart={setCart}
               />
             ))
           ) : (
