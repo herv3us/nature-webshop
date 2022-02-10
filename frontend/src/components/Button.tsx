@@ -14,6 +14,8 @@ interface Props {
 function Button(props: Props) {
   const { product } = props;
   const [buttonText, setButtonText] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
+  const [message, setMessage] = useState('');
   const user = getUserFromLocalStorage();
 
   useEffect(() => {
@@ -44,6 +46,17 @@ function Button(props: Props) {
 
           //set a new localStorage with the updated pruduct.
           saveCartToLocalStorage([...cart, foundProduct]);
+          setMessage('Produkten ligger nu i din kundkorg');
+          setTimeout(() => {
+            setMessage('');
+            setIsClicked(false);
+          }, 3000);
+        } else {
+          setMessage('Finns tyvärr inga fler i lager');
+          setTimeout(() => {
+            setMessage('');
+            setIsClicked(false);
+          }, 3000);
         }
       } else {
         const newProduct = {
@@ -78,6 +91,7 @@ function Button(props: Props) {
     e.preventDefault();
     if (user?.role === 'customer') {
       addToCart(product);
+      setIsClicked(!isClicked);
     } else if (user?.role === 'admin') {
       console.log('you want to edit this product');
       // navigera admin till en sida där man kan uppdatera produkten
@@ -85,9 +99,12 @@ function Button(props: Props) {
   };
 
   return (
-    <StyledBtn onClick={(e) => handleClick(e)} disabled={product.stock === 0}>
-      {buttonText}
-    </StyledBtn>
+    <div>
+      <StyledBtn onClick={(e) => handleClick(e)} disabled={product.stock === 0}>
+        {buttonText}
+      </StyledBtn>
+      {isClicked ? <StyledSmall>{message}</StyledSmall> : null}
+    </div>
   );
 }
 
@@ -113,4 +130,15 @@ const StyledBtn = styled.button`
     border: 1px solid #476647e4;
     color: #eee;
   }
+`;
+
+const StyledSmall = styled.small`
+  z-index: 50;
+  background-color: #b3b0b0ef;
+  width: 50%;
+  padding: 0.2rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `;

@@ -25,21 +25,41 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 0.8rem;
-`;
 
-export const Input = styled.input`
-  margin-top: 0.3rem;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  background-color: #eeeeeec5;
+  input {
+    margin-top: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    background-color: #eeeeeec5;
+    margin-bottom: 0.3rem;
 
-  &:active,
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    &:active,
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .invisible {
+    /* visibility: hidden; */
+    opacity: 0;
+  }
+
+  .valid {
+    border: 2px solid lightgreen;
+  }
+
+  .invalid {
+    border: 2px solid red;
+  }
+
+  .error {
+    color: #c04e4e;
   }
 `;
+
+// export const Input = styled.input``;
 
 export const Button = styled.button`
   padding: 0.3rem 1rem;
@@ -59,6 +79,12 @@ export const Button = styled.button`
 
   &:active {
     transform: scale(0.98);
+    outline: none;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid lightgreen;
   }
 `;
 
