@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import {
   singleProduct,
   singleProducthighStock,
+  singleProductNoStock,
 } from '../../dummyData/products';
 
 const setIsOpenMock = jest.fn();
@@ -57,6 +58,14 @@ describe('Test for ProductPopup', () => {
     );
     const highStock = screen.queryByText(/endast ett fåtal kvar i lager/i);
     expect(highStock).not.toBeInTheDocument();
+  });
+
+  it('render out of stock if out of stock', () => {
+    render(
+      <ProductPopup product={singleProductNoStock} setIsOpen={setIsOpenMock} />
+    );
+    const highStock = screen.getByText(/Produkten är slut i lager./i);
+    expect(highStock).toBeInTheDocument();
   });
 
   it('render the price of the product', () => {
