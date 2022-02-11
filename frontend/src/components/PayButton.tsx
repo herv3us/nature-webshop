@@ -12,7 +12,7 @@ interface Props {
 }
 
 function PayButton(props: Props) {
-  const { setIsOpen, setProductsInCart } = props;
+  const { setIsOpen } = props;
   const cart = getCartFromLocalStorage();
   const token = getTokenFromLocalStorage();
 
@@ -38,6 +38,7 @@ function PayButton(props: Props) {
     const data = await updateProduct(newProduct, product.id, token as string);
 
     if (data.success) {
+      console.log(data);
       setIsOpen(true);
       localStorage.removeItem('cart');
     }
