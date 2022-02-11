@@ -1,6 +1,12 @@
-import { getAllProducts } from './../services/productService';
 import { useEffect, useState } from 'react';
+import { getAllProducts } from './../services/productService';
 import { Product } from './../models/Product';
+import { search } from '../utils/search';
+import {
+  saveBackpacksToLocalStorage,
+  saveJacketsToLocalStorage,
+  saveShoesToLocalStorage,
+} from '../services/localStorageService';
 import Header from './../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
 import styled from 'styled-components';
@@ -10,12 +16,16 @@ interface Props {
   src: string;
   products: Product[];
   setProducts: Function;
-  search: Function;
+  searchString: string;
+  searchParam: string[];
 }
 
 function StartPage(props: Props) {
-  const { src, products, setProducts, search } = props;
+  const { src, products, setProducts, searchString, searchParam } = props;
   const [isLoaded, setIsLoaded] = useState(false);
+  const allBackpacks: Product[] = [];
+  const allJackets: Product[] = [];
+  const allShoes: Product[] = [];
 
   useEffect(() => {
     getProducts();
@@ -26,6 +36,21 @@ function StartPage(props: Props) {
     setProducts(data.products);
     setIsLoaded(true);
   };
+
+  useEffect(() => {
+    products?.filter((product) => {
+      if (product.category === 'jacket') {
+        allJackets.push(product);
+      } else if (product.category === 'backpack') {
+        allBackpacks.push(product);
+      } else if (product.category === 'shoes') {
+        allShoes.push(product);
+      }
+      saveJacketsToLocalStorage(allJackets);
+      saveBackpacksToLocalStorage(allBackpacks);
+      saveShoesToLocalStorage(allShoes);
+    });
+  }, [products]);
 
   return (
     <Wrapper>
@@ -38,7 +63,7 @@ function StartPage(props: Props) {
         <div>Loading...</div>
       ) : (
         <WrapperUl>
-          {search(products).map((product: any) => (
+          {search(products, searchParam, searchString).map((product: any) => (
             <ProductCardMini product={product} key={product.id} />
           ))}
         </WrapperUl>

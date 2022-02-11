@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from './../models/Product';
-import { getTokenFromLocalStorage } from '../services/localStorageService';
+import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../services/localStorageService';
 import ProductPopup from './ProductPopup';
 import Button from './Button';
 
@@ -12,12 +15,22 @@ interface Props {
 function ProductCardMini(props: Props) {
   const { product } = props;
   const token = getTokenFromLocalStorage();
+  const user = getUserFromLocalStorage();
+  const [className, setClassName] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (user?.role === 'customer' && product.stock <= 0) {
+      setClassName('outOfStock');
+    } else {
+      setClassName('');
+    }
+  }, []);
 
   return (
     <div>
       <WrapperLi onClick={() => setIsOpen(true)}>
-        {token ? <Button product={product} /> : null}
+        {token ? <Button product={product} className={className} /> : null}
         <Image src={product.imgUrl} alt={product.title} />
         <Wrapper>
           <h2>{product.title}</h2>

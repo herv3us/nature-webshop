@@ -38,7 +38,6 @@ function PayButton(props: Props) {
     const data = await updateProduct(newProduct, product.id, token as string);
 
     if (data.success) {
-      console.log('it worked.');
       setIsOpen(true);
       localStorage.removeItem('cart');
     }

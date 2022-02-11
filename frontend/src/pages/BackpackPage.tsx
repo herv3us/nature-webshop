@@ -4,23 +4,27 @@ import ProductCardMini from '../components/ProductCardMini';
 import Header from '../components/Header';
 import { WrapperUl } from '../styling/WrapperUl.styled';
 import styled from 'styled-components';
+import { search } from '../utils/search';
 
 interface Props {
   src: string;
-  search: Function;
+  searchString: string;
+  searchParam: string[];
 }
 
 function BackpackPage(props: Props) {
-  const { src, search } = props;
+  const { src, searchString, searchParam } = props;
   const allBackpacks = getBackpacksFromLocalStorage();
 
   return (
     <Wrapper>
       <Header src={src} title={'Any backpack'} subtitle={'For every moment.'} />
       <WrapperUl>
-        {search(allBackpacks)?.map((product: Product) => (
-          <ProductCardMini product={product} key={product.id} />
-        ))}
+        {search(allBackpacks as Product[], searchParam, searchString)?.map(
+          (product: Product) => (
+            <ProductCardMini product={product} key={product.id} />
+          )
+        )}
       </WrapperUl>
     </Wrapper>
   );

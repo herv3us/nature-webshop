@@ -9,22 +9,21 @@ import styled from 'styled-components';
 
 interface Props {
   product: Product;
+  className: string;
 }
 
 function Button(props: Props) {
-  const { product } = props;
+  const { product, className } = props;
   const [buttonText, setButtonText] = useState('');
   const user = getUserFromLocalStorage();
-
-  // const cart = getCartFromLocalStorage();
-
-  // const foundProduct = cart?.find((item) => item.id === product.id);
 
   useEffect(() => {
     if (user?.role === 'admin') {
       setButtonText('Redigera');
-    } else if (user?.role === 'customer') {
+    } else if (user?.role === 'customer' && product.stock > 0) {
       setButtonText('Köp');
+    } else {
+      setButtonText('Slut');
     }
   }, []);
 
@@ -44,11 +43,13 @@ function Button(props: Props) {
           if (i !== -1) {
             cart.splice(i, 1);
           }
-          saveCartToLocalStorage(cart);
-
           //set a new localStorage with the updated pruduct.
           saveCartToLocalStorage([...cart, foundProduct]);
+        } else if (foundProduct.stock <= 0) {
+          return;
         }
+      } else if (product.stock <= 0) {
+        return;
       } else {
         const newProduct = {
           id: product.id,
@@ -62,6 +63,8 @@ function Button(props: Props) {
         };
         saveCartToLocalStorage([...cart, newProduct]);
       }
+    } else if (product.stock === 0) {
+      return;
     } else {
       const newProduct = {
         id: product.id,
@@ -89,36 +92,56 @@ function Button(props: Props) {
   };
 
   return (
-    <div>
-      <StyledBtn onClick={(e) => handleClick(e)}>{buttonText}</StyledBtn>
-    </div>
+    <StyledBtn>
+      <button onClick={(e) => handleClick(e)} className={className}>
+        {buttonText}
+      </button>
+    </StyledBtn>
   );
 }
 
 export default Button;
 
-const StyledBtn = styled.button`
-  cursor: pointer;
-  background-color: #eeeeeeeb;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  color: #353535;
-  font-weight: bold;
-  padding: 0.2rem 0.9rem;
-  position: absolute;
-  top: 20px;
-  right: 15px;
-  z-index: 40;
-  text-transform: uppercase;
-  transition: ease all 0.5s;
+const StyledBtn = styled.div`
+  button {
+    cursor: pointer;
+    background-color: #eeeeeeeb;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #353535;
+    font-weight: bold;
+    padding: 0.2rem 0.9rem;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    z-index: 40;
+    text-transform: uppercase;
+    transition: ease all 0.5s;
+    &:hover {
+      background-color: #476647e4;
+      border: 1px solid #476647e4;
+      color: #eee;
+    }
 
-  &:hover {
-    background-color: #476647e4;
-    border: 1px solid #476647e4;
-    color: #eee;
+    &:active {
+      transform: scale(0.96);
+    }
   }
 
-  &:active {
-    transform: scale(0.96);
+  .outOfStock {
+    cursor: default !important;
+    /* pointer-events: none; */
+    background-color: #eee;
+    color: #ddd;
+
+    &:hover {
+      border: 1px solid #eee;
+      background-color: #eee;
+      color: #ddd;
+    }
+
+    &:active {
+      transform: scale(1);
+    }
   }
 `;

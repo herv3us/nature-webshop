@@ -1,10 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import {
-  saveBackpacksToLocalStorage,
-  saveJacketsToLocalStorage,
-  saveShoesToLocalStorage,
-} from './services/localStorageService';
+import { useState } from 'react';
 import { Product } from './models/Product';
 import StartPage from './pages/StartPage';
 import Navbar from './components/Navbar';
@@ -18,44 +13,13 @@ function App() {
   const [products, setProducts] = useState<[] | [Product]>([]);
   const [searchString, setSearchString] = useState('');
   const [searchParam] = useState(['title', 'description']);
-  const allBackpacks: Product[] = [];
-  const allJackets: Product[] = [];
-  const allShoes: Product[] = [];
-  const srcVideo: [string, string, string, string, string] = [
+
+  const srcVideo: string[] = [
     '/images/adventure.mp4',
     '/images/backpack.mp4',
-    '/images/beenie.mp4',
     '/images/jacket.mp4',
     '/images/shoes.mp4',
   ];
-
-  const search = (products: any) => {
-    return products.filter((product: any) => {
-      return searchParam.some((newProduct) => {
-        return (
-          product[newProduct]
-            .toString()
-            .toLowerCase()
-            .indexOf(searchString.toLowerCase()) > -1
-        );
-      });
-    });
-  };
-
-  useEffect(() => {
-    products?.filter((product) => {
-      if (product.category === 'jacket') {
-        allJackets.push(product);
-      } else if (product.category === 'backpack') {
-        allBackpacks.push(product);
-      } else if (product.category === 'shoes') {
-        allShoes.push(product);
-      }
-      saveJacketsToLocalStorage(allJackets);
-      saveBackpacksToLocalStorage(allBackpacks);
-      saveShoesToLocalStorage(allShoes);
-    });
-  }, [products]);
 
   return (
     <Router>
@@ -69,21 +33,40 @@ function App() {
                 src={srcVideo[0]}
                 products={products}
                 setProducts={setProducts}
-                search={search}
+                searchString={searchString}
+                searchParam={searchParam}
               />
             }
           />
           <Route
             path="/backpack"
-            element={<BackpackPage src={srcVideo[1]} search={search} />}
+            element={
+              <BackpackPage
+                src={srcVideo[1]}
+                searchString={searchString}
+                searchParam={searchParam}
+              />
+            }
           />
           <Route
             path="/jacket"
-            element={<JacketPage src={srcVideo[3]} search={search} />}
+            element={
+              <JacketPage
+                src={srcVideo[2]}
+                searchString={searchString}
+                searchParam={searchParam}
+              />
+            }
           />
           <Route
             path="/shoes"
-            element={<ShoesPage src={srcVideo[4]} search={search} />}
+            element={
+              <ShoesPage
+                src={srcVideo[3]}
+                searchString={searchString}
+                searchParam={searchParam}
+              />
+            }
           />
           <Route path="/mypage" element={<LoginPage />} />
         </Routes>

@@ -21,7 +21,9 @@ function ProductPopup(props: Props) {
   const [lowStockMessage, setLowStockMessage] = useState('');
 
   useEffect(() => {
-    if (product.stock <= 5) {
+    if (product.stock <= 0) {
+      setLowStockMessage('Produkten är slut i lager.');
+    } else if (product.stock <= 5) {
       setLowStockMessage('Passa på att handla, endast ett fåtal kvar i lager');
     } else {
       setLowStockMessage('');
