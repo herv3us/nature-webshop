@@ -20,6 +20,12 @@ let successfulFetchResponse = {
   },
 };
 
+const mockNavigator = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigator,
+}));
+
 jest.mock('../../services/localStorageService', () => {
   return {
     saveUserInLocalStorage: jest.fn(),
@@ -34,44 +40,44 @@ describe('Tests for LoginForm component', () => {
 
   it('render the title Login', () => {
     render(<LoginForm />);
-    const title = screen.getByRole('heading', { name: 'Login' });
+    const title = screen.getByRole('heading', { name: 'Logga in' });
     expect(title).toBeInTheDocument();
   });
 
   it('render labels for inputfields', () => {
     render(<LoginForm />);
-    const labelUsername = screen.getByText(/username/i);
+    const labelUsername = screen.getByText(/användarnamn/i);
     expect(labelUsername).toBeInTheDocument();
 
-    const labelPassword = screen.getByText(/password/i);
+    const labelPassword = screen.getByText(/lösenord/i);
     expect(labelPassword).toBeInTheDocument();
   });
 
   it('render an inputfiels', () => {
     render(<LoginForm />);
-    const inputUsername = screen.getByPlaceholderText('Username');
+    const inputUsername = screen.getByPlaceholderText('Användarnamn');
     expect(inputUsername).toBeInTheDocument();
-    const inputPass = screen.getByPlaceholderText('Password');
+    const inputPass = screen.getByPlaceholderText('Lösenord');
     expect(inputPass).toBeInTheDocument();
   });
 
   it('render a submit-button for the form', () => {
     render(<LoginForm />);
-    const submit = screen.getByRole('button', { name: 'Login' });
+    const submit = screen.getByRole('button', { name: /login/i });
     expect(submit).toBeInTheDocument();
   });
 
   it('render the value your typed into the inputfield in the input', () => {
     render(<LoginForm />);
-    const input = screen.getByPlaceholderText('Username');
+    const input = screen.getByPlaceholderText('Användarnamn');
     userEvent.type(input, 'KlaraBella');
     expect(input).toHaveValue('KlaraBella');
   });
 
   it('empties the inputfields when submitting the form', () => {
     render(<LoginForm />);
-    const input = screen.getByPlaceholderText('Username');
-    const inputpass = screen.getByPlaceholderText('Password');
+    const input = screen.getByPlaceholderText('Användarnamn');
+    const inputpass = screen.getByPlaceholderText('Lösenord');
     userEvent.type(input, 'KlaraBella');
     userEvent.type(inputpass, 'password');
     const button = screen.getByRole('button', { name: /Login/i });
@@ -90,8 +96,8 @@ describe('Tests for LoginForm component', () => {
 
     it('saves the user in localstorage', async () => {
       render(<LoginForm />);
-      const usernameInput = screen.getByPlaceholderText(/username/i);
-      const passwordInput = screen.getByPlaceholderText(/password/i);
+      const usernameInput = screen.getByPlaceholderText(/användarnamn/i);
+      const passwordInput = screen.getByPlaceholderText(/lösenord/i);
       const submitBtn = screen.getByRole('button', { name: 'Login' });
 
       userEvent.type(usernameInput, 'Klasse');
@@ -111,6 +117,21 @@ describe('Tests for LoginForm component', () => {
       });
     });
 
+    it('navigates the user to startpage', async () => {
+      render(<LoginForm />);
+      const usernameInput = screen.getByPlaceholderText(/användarnamn/i);
+      const passwordInput = screen.getByPlaceholderText(/lösenord/i);
+      const submitBtn = screen.getByRole('button', { name: 'Login' });
+
+      userEvent.type(usernameInput, 'Klasse');
+      userEvent.type(passwordInput, 'password');
+      userEvent.click(submitBtn);
+
+      await waitFor(() => {
+        expect(mockNavigator).toHaveBeenCalledWith('/');
+      });
+    });
+
     afterAll(() => {
       jest.clearAllMocks();
     });
@@ -120,8 +141,8 @@ describe('Tests for LoginForm component', () => {
     it('does not save token and user to localstorage', async () => {
       render(<LoginForm />);
 
-      const usernameInput = screen.getByPlaceholderText(/username/i);
-      const passwordInput = screen.getByPlaceholderText(/password/i);
+      const usernameInput = screen.getByPlaceholderText(/användarnamn/i);
+      const passwordInput = screen.getByPlaceholderText(/lösenord/i);
       const submitBtn = screen.getByRole('button', { name: 'Login' });
 
       userEvent.type(usernameInput, 'Klasse');

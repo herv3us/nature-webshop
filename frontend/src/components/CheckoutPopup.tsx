@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCartFromLocalStorage } from '../services/localStorageService';
 import {
   Overlay,
