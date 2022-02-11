@@ -2,6 +2,7 @@ import { Product } from '../models/Product';
 import styled from 'styled-components';
 import { saveCartToLocalStorage } from '../services/localStorageService';
 import { useEffect, useState } from 'react';
+import DeleteBtn from './DeleteBtn';
 interface Props {
   product: Product;
   cart: Product[];
@@ -49,22 +50,6 @@ function CartProductInfo(props: Props) {
     }
   };
 
-  const deleteProduct = (e: any, product: Product) => {
-    e.preventDefault();
-    if (cart && cart.length > 1) {
-      const i = cart?.findIndex((item) => item.title === product.title);
-      if (i !== -1) {
-        cart.splice(i, 1);
-      }
-      setCart([...cart]);
-      setProductsInCart([...cart]);
-    } else if (cart.length === 1) {
-      setCart(null);
-      setProductsInCart(null);
-      localStorage.removeItem('cart');
-    }
-  };
-
   useEffect(() => {
     saveCartToLocalStorage(cart as Product[]);
     setThisProduct(product);
@@ -72,7 +57,12 @@ function CartProductInfo(props: Props) {
 
   return (
     <StyledLi>
-      <DeleteBtn onClick={(e) => deleteProduct(e, product)}>X</DeleteBtn>
+      <DeleteBtn
+        product={product}
+        cart={cart}
+        setCart={setCart}
+        setProductsInCart={setProductsInCart}
+      />
       <Wrapper>
         <Image src={thisProduct.imgUrl} alt={thisProduct.title} />
         <TitleWrapper>
@@ -160,28 +150,4 @@ const Image = styled.img`
   object-fit: cover;
   border-radius: 0.4rem;
   margin: 0.4rem;
-`;
-
-const DeleteBtn = styled.button`
-  cursor: pointer;
-  position: absolute;
-  top: 0.3rem;
-  right: 0.3rem;
-  font-weight: bold;
-  color: #c04e4e;
-  border: none;
-  background-color: #ddd;
-  border-radius: 50%;
-  height: 1.5rem;
-  width: 1.5rem;
-  text-align: center;
-
-  @media (max-width: 655px) {
-    top: -17.5rem;
-  }
-
-  &:hover {
-    color: #eee;
-    background-color: #c04e4e;
-  }
 `;
