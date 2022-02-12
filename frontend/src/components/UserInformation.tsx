@@ -36,8 +36,8 @@ function UserInformation() {
             Namn: {user?.firstName} {user?.lastName}
           </p>
           <p>Adress: {user?.address}</p>
-          <p>Postkod: {user?.zipCode}</p>
-          <p>Stad: {user?.city}</p>
+          <p>Postnummer: {user?.zipCode}</p>
+          <p>Ort: {user?.city}</p>
         </UserInfo>
       </Content>
     </InfoWrapper>

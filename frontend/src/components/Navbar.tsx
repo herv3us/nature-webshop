@@ -18,10 +18,10 @@ function Navbar(props: Props) {
         <li onClick={() => navigate('/')} title="Startsida" className="home">
           ⛺
         </li>
-        <SearchForm
+        {/* <SearchForm
           searchString={searchString}
           setSearchString={setSearchString}
-        />
+        /> */}
       </div>
       <StyledUl>
         <li onClick={() => navigate('/jacket')}>Jackor</li>

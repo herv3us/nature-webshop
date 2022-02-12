@@ -69,7 +69,7 @@ function Cart() {
         </StyledUl>
         {productsInCart && productsInCart?.length > 0 ? (
           <TotalValueWrapper>
-            <TotalValue>Totaltbelopp: {cartValue} kr</TotalValue>
+            <TotalValue>Totalbelopp: {cartValue} kr</TotalValue>
             <PayButton
               setIsOpen={setIsOpen}
               setProductsInCart={setProductsInCart}

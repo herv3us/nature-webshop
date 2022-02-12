@@ -35,6 +35,7 @@ function App() {
                 setProducts={setProducts}
                 searchString={searchString}
                 searchParam={searchParam}
+                setSearchString={setSearchString}
               />
             }
           />

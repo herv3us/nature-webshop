@@ -11,6 +11,7 @@ import Header from './../components/Header';
 import ProductCardMini from '../components/ProductCardMini';
 import styled from 'styled-components';
 import { WrapperUl } from '../styling/WrapperUl.styled';
+import SearchForm from '../components/SearchForm';
 
 interface Props {
   src: string;
@@ -18,10 +19,18 @@ interface Props {
   setProducts: Function;
   searchString: string;
   searchParam: string[];
+  setSearchString: Function;
 }
 
 function StartPage(props: Props) {
-  const { src, products, setProducts, searchString, searchParam } = props;
+  const {
+    src,
+    products,
+    setProducts,
+    searchString,
+    searchParam,
+    setSearchString,
+  } = props;
   const [isLoaded, setIsLoaded] = useState(false);
   const allBackpacks: Product[] = [];
   const allJackets: Product[] = [];
@@ -62,11 +71,17 @@ function StartPage(props: Props) {
       {!isLoaded ? (
         <div>Loading...</div>
       ) : (
-        <WrapperUl>
-          {search(products, searchParam, searchString).map((product: any) => (
-            <ProductCardMini product={product} key={product.id} />
-          ))}
-        </WrapperUl>
+        <div>
+          <SearchForm
+            searchString={searchString}
+            setSearchString={setSearchString}
+          />
+          <WrapperUl>
+            {search(products, searchParam, searchString).map((product: any) => (
+              <ProductCardMini product={product} key={product.id} />
+            ))}
+          </WrapperUl>
+        </div>
       )}
     </Wrapper>
   );
