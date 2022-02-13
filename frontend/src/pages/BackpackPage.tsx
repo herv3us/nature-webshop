@@ -8,23 +8,19 @@ import { search } from '../utils/search';
 
 interface Props {
   src: string;
-  searchString: string;
-  searchParam: string[];
 }
 
 function BackpackPage(props: Props) {
-  const { src, searchString, searchParam } = props;
+  const { src } = props;
   const allBackpacks = getBackpacksFromLocalStorage();
 
   return (
     <Wrapper>
       <Header src={src} title={'Any backpack'} subtitle={'For every moment.'} />
       <WrapperUl>
-        {search(allBackpacks as Product[], searchParam, searchString)?.map(
-          (product: Product) => (
-            <ProductCardMini product={product} key={product.id} />
-          )
-        )}
+        {(allBackpacks as Product[]).map((product: Product) => (
+          <ProductCardMini product={product} key={product.id} />
+        ))}
       </WrapperUl>
     </Wrapper>
   );

@@ -69,7 +69,7 @@ function StartPage(props: Props) {
         subtitle={'Your adventure starts here.'}
       />
       {!isLoaded ? (
-        <div>Loading...</div>
+        <div>⌛ Loading...</div>
       ) : (
         <div>
           <SearchForm

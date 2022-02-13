@@ -1,24 +1,9 @@
 import SearchForm from '../SearchForm';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { search } from '../../utils/search';
-import { getAllProducts } from '../../services/productService';
-import { products } from '../../dummyData/products';
 
 const setSearchStringMock = jest.fn();
 const searchStringMock = 'backpack';
-
-jest.mock('../../utils/search', () => {
-  return {
-    search: jest.fn() as jest.Mock,
-  };
-});
-
-jest.mock('../../services/productService', () => {
-  return {
-    getAllProducts: jest.fn() as jest.Mock,
-  };
-});
 
 describe('Tests for SearchForm', () => {
   it('render without crashing', () => {
@@ -42,10 +27,7 @@ describe('Tests for SearchForm', () => {
     expect(inputElem).toBeInTheDocument();
   });
 
-  it('search for backpacks when typing backpack in inputfiled', () => {
-    (search as jest.Mock<any>).mockImplementation(() => 'backpack');
-    (getAllProducts as jest.Mock<any>).mockImplementation(() => products);
-
+  it('start searching for backpacks when typing back in inputfiled..', () => {
     render(
       <SearchForm
         searchString={searchStringMock}
@@ -54,8 +36,8 @@ describe('Tests for SearchForm', () => {
     );
 
     const inputElem = screen.getByPlaceholderText(/sök/i);
-    userEvent.type(inputElem, 'backpack');
+    userEvent.type(inputElem, 'back');
 
-    expect(setSearchStringMock).toHaveBeenCalledTimes(8);
+    expect(setSearchStringMock).toHaveBeenCalledTimes(4);
   });
 });

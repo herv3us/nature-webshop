@@ -1,14 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SearchForm from './SearchForm';
 import { getTokenFromLocalStorage } from '../services/localStorageService';
-interface Props {
-  searchString: string;
-  setSearchString: Function;
-}
 
-function Navbar(props: Props) {
-  const { searchString, setSearchString } = props;
+function Navbar() {
   const token = getTokenFromLocalStorage();
   const navigate = useNavigate();
 
@@ -18,10 +12,6 @@ function Navbar(props: Props) {
         <li onClick={() => navigate('/')} title="Startsida" className="home">
           ⛺
         </li>
-        {/* <SearchForm
-          searchString={searchString}
-          setSearchString={setSearchString}
-        /> */}
       </div>
       <StyledUl>
         <li onClick={() => navigate('/jacket')}>Jackor</li>

@@ -4,7 +4,6 @@ import { getTokenFromLocalStorage } from '../../services/localStorageService';
 import userEvent from '@testing-library/user-event';
 
 const mockNavigator = jest.fn();
-const setSearchStringMock = jest.fn();
 
 jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigator,
@@ -18,55 +17,41 @@ jest.mock('../../services/localStorageService', () => {
 
 describe('Tests for Navbar', () => {
   it('render without crashing', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
   });
 
   it('render a logo', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const logo = screen.getByText('⛺');
     expect(logo).toBeInTheDocument();
   });
 
   it('render the link for the jacket-page', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const jacketlink = screen.getByText(/jackor/i);
     expect(jacketlink).toBeInTheDocument();
   });
 
   it('render the link for the backpack-page', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const backpacklink = screen.getByText(/Ryggsäckar/i);
     expect(backpacklink).toBeInTheDocument();
   });
 
   it('render the link for the shoes-page', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const shoelink = screen.getByText(/skor/i);
     expect(shoelink).toBeInTheDocument();
   });
 
   it('render the link for Login', () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const login = screen.getByText(/Logga in/i);
     expect(login).toBeInTheDocument();
   });
 
   it('navigate to jacketpage when clicking the link', async () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const jackets = screen.getByText(/Jackor/i);
     userEvent.click(jackets);
 
@@ -76,9 +61,7 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to backpackPage when clicking the link', async () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const backpack = screen.getByText(/Ryggsäckar/i);
     userEvent.click(backpack);
 
@@ -88,9 +71,7 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to shoesPage when clicking the link', async () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const shoes = screen.getByText(/Skor/i);
     userEvent.click(shoes);
 
@@ -100,9 +81,7 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to "LoginPage" when clicking the Login-link', async () => {
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const myPage = screen.getByText(/Logga in/i);
     userEvent.click(myPage);
 
@@ -115,9 +94,7 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const login = screen.getByText(/Mina sidor/i);
     expect(login).toBeInTheDocument();
   });
@@ -126,9 +103,7 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
-    render(
-      <Navbar searchString={'Ryggsäck'} setSearchString={setSearchStringMock} />
-    );
+    render(<Navbar />);
     const myPage = screen.getByText(/Mina sidor/i);
     userEvent.click(myPage);
 

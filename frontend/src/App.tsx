@@ -24,7 +24,7 @@ function App() {
   return (
     <Router>
       <Wrapper>
-        <Navbar searchString={searchString} setSearchString={setSearchString} />
+        <Navbar />
         <Routes>
           <Route
             path="/"
@@ -41,13 +41,7 @@ function App() {
           />
           <Route
             path="/backpack"
-            element={
-              <BackpackPage
-                src={srcVideo[1]}
-                searchString={searchString}
-                searchParam={searchParam}
-              />
-            }
+            element={<BackpackPage src={srcVideo[1]} />}
           />
           <Route
             path="/jacket"
