@@ -2,39 +2,23 @@ import { useEffect, useState } from 'react';
 import { getAllProducts } from './../services/productService';
 import { Product } from './../models/Product';
 import { search } from '../utils/search';
-import {
-  saveBackpacksToLocalStorage,
-  saveJacketsToLocalStorage,
-  saveShoesToLocalStorage,
-} from '../services/localStorageService';
 import Header from './../components/Header';
+import SearchForm from '../components/SearchForm';
 import ProductCardMini from '../components/ProductCardMini';
 import styled from 'styled-components';
 import { WrapperUl } from '../styling/WrapperUl.styled';
-import SearchForm from '../components/SearchForm';
+import { filterProducts } from '../utils/filterProducts';
 
 interface Props {
   src: string;
-  products: Product[];
-  setProducts: Function;
-  searchString: string;
-  searchParam: string[];
-  setSearchString: Function;
 }
 
 function StartPage(props: Props) {
-  const {
-    src,
-    products,
-    setProducts,
-    searchString,
-    searchParam,
-    setSearchString,
-  } = props;
+  const { src } = props;
+  const [products, setProducts] = useState<[] | [Product]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const allBackpacks: Product[] = [];
-  const allJackets: Product[] = [];
-  const allShoes: Product[] = [];
+  const [searchString, setSearchString] = useState('');
+  const [searchParam] = useState(['title', 'description']);
 
   useEffect(() => {
     getProducts();
@@ -47,18 +31,7 @@ function StartPage(props: Props) {
   };
 
   useEffect(() => {
-    products?.filter((product) => {
-      if (product.category === 'jacket') {
-        allJackets.push(product);
-      } else if (product.category === 'backpack') {
-        allBackpacks.push(product);
-      } else if (product.category === 'shoes') {
-        allShoes.push(product);
-      }
-      saveJacketsToLocalStorage(allJackets);
-      saveBackpacksToLocalStorage(allBackpacks);
-      saveShoesToLocalStorage(allShoes);
-    });
+    filterProducts(products);
   }, [products]);
 
   return (
@@ -69,9 +42,9 @@ function StartPage(props: Props) {
         subtitle={'Your adventure starts here.'}
       />
       {!isLoaded ? (
-        <div>⌛ Loading...</div>
+        <Content>⌛ Loading...</Content>
       ) : (
-        <div>
+        <Content>
           <SearchForm
             searchString={searchString}
             setSearchString={setSearchString}
@@ -81,7 +54,7 @@ function StartPage(props: Props) {
               <ProductCardMini product={product} key={product.id} />
             ))}
           </WrapperUl>
-        </div>
+        </Content>
       )}
     </Wrapper>
   );
@@ -90,6 +63,12 @@ function StartPage(props: Props) {
 export default StartPage;
 
 const Wrapper = styled.div`
-  max-width: 1400px;
   margin: 0 auto 5rem;
+`;
+
+const Content = styled.div`
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 `;

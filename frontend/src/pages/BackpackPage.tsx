@@ -4,7 +4,6 @@ import ProductCardMini from '../components/ProductCardMini';
 import Header from '../components/Header';
 import { WrapperUl } from '../styling/WrapperUl.styled';
 import styled from 'styled-components';
-import { search } from '../utils/search';
 
 interface Props {
   src: string;
