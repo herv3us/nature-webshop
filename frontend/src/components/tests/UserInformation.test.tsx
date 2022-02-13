@@ -33,8 +33,8 @@ describe('Tests for UserInfo', () => {
   it('displays the full address for the user', () => {
     render(<UserInformation />);
     const address = screen.getByText(`Adress: ${user.address}`);
-    const zipCode = screen.getByText(`Postkod: ${user.zipCode}`);
-    const city = screen.getByText(`Stad: ${user.city}`);
+    const zipCode = screen.getByText(`Postnummer: ${user.zipCode}`);
+    const city = screen.getByText(`Ort: ${user.city}`);
 
     expect(address).toBeInTheDocument();
     expect(zipCode).toBeInTheDocument();

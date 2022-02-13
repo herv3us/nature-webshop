@@ -7,7 +7,7 @@ export const singleProduct = {
   price: 500,
   stock: 4,
   id: '21321',
-  inCart: 1,
+  inCart: 2,
 };
 
 export const singleProducthighStock = {
