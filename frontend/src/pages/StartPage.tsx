@@ -13,8 +13,7 @@ interface Props {
   src: string;
 }
 
-function StartPage(props: Props) {
-  const { src } = props;
+function StartPage({ src }: Props) {
   const [products, setProducts] = useState<[] | [Product]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [searchString, setSearchString] = useState('');

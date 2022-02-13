@@ -3,6 +3,7 @@ import { getCartFromLocalStorage } from '../services/localStorageService';
 import { Wrapper, Content, StyledUl } from '../styling/MyPage.styled';
 import { useEffect, useState } from 'react';
 import { Product } from '../models/Product';
+import { countTotalValue } from '../utils/countTotalValue';
 import PayButton from './PayButton';
 import styled from 'styled-components';
 import CheckoutPopup from './CheckoutPopup';
@@ -14,26 +15,10 @@ function Cart() {
   );
   const [productsInCart, setProductsInCart] = useState<[] | Product[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const count: [number] = [0];
-
-  const sum = () => {
-    const sum = count.reduce(function (a, b) {
-      return a + b;
-    }, 0);
-    setCartValue(sum);
-  };
-
-  const countTotalValue = (cart: Product[]) => {
-    if (cart?.length > 0) {
-      cart?.map((item) => {
-        count.push(item.price * item.inCart);
-      });
-      sum();
-    }
-  };
 
   useEffect(() => {
-    countTotalValue(cart);
+    const sum = countTotalValue(cart);
+    setCartValue(sum as number);
   }, [cart, setCart]);
 
   useEffect(() => {
