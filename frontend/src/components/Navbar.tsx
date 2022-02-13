@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { getTokenFromLocalStorage } from '../services/localStorageService';
-import { MdPerson } from 'react-icons/md';
-import { MdEmojiNature } from 'react-icons/md';
+import { MdPerson, MdEmojiNature } from 'react-icons/md';
+import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 function Navbar() {
   const token = getTokenFromLocalStorage();
   const navigate = useNavigate();
+  const [amountOfProducts] = useRecoilState(amountOfProductsInCartState);
 
+  console.log(amountOfProducts);
   return (
     <StyledNavbar>
       <div>
@@ -27,7 +30,10 @@ function Navbar() {
             </MyPages>
           </li>
         ) : (
-          <li onClick={() => navigate('/mypage')}>Logga in</li>
+          <CartWrapper>
+            <li onClick={() => navigate('/mypage')}>Logga in</li>
+            {amountOfProducts > 0 ? <Amount>{amountOfProducts}</Amount> : null}
+          </CartWrapper>
         )}
       </StyledUl>
     </StyledNavbar>
@@ -35,6 +41,21 @@ function Navbar() {
 }
 
 export default Navbar;
+
+const CartWrapper = styled.div`
+  position: relative;
+`;
+
+const Amount = styled.p`
+  background-color: #fff;
+  color: black;
+  font-size: 1.6rem;
+  padding: 1rem;
+  position: absolute;
+  top: 100px;
+  left: 200px;
+  z-index: 1500;
+`;
 
 const MyPages = styled.div`
   border-bottom: 1px solid transparent !important;

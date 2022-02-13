@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 import {
   getUserFromLocalStorage,
   saveCartToLocalStorage,
@@ -6,6 +7,7 @@ import {
 } from '../services/localStorageService';
 import { Product } from '../models/Product';
 import styled from 'styled-components';
+import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 
 interface Props {
   product: Product;
@@ -14,8 +16,12 @@ interface Props {
 
 function Button(props: Props) {
   const { product, className } = props;
-  const [buttonText, setButtonText] = useState('');
   const user = getUserFromLocalStorage();
+  const cart = getCartFromLocalStorage();
+  const [buttonText, setButtonText] = useState('');
+  const [amountOfProducts, setAmountOfProducts] = useRecoilState(
+    amountOfProductsInCartState
+  );
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -31,7 +37,6 @@ function Button(props: Props) {
   // It also checks if the products is already in the
   // cart, and then updates it's inCart value
   const addToCart = (product: Product) => {
-    const cart = getCartFromLocalStorage();
     if (cart && cart?.length > 0) {
       //find out if the product even exist in the cart
       const foundProduct = cart?.find((item) => item.id === product.id);
@@ -45,6 +50,7 @@ function Button(props: Props) {
           }
           //set a new localStorage with the updated pruduct.
           saveCartToLocalStorage([...cart, foundProduct]);
+          setAmountOfProducts(amountOfProducts + 1);
         } else if (foundProduct.stock <= 0) {
           return;
         }
@@ -62,6 +68,7 @@ function Button(props: Props) {
           inCart: 1,
         };
         saveCartToLocalStorage([...cart, newProduct]);
+        setAmountOfProducts(amountOfProducts + 1);
       }
     } else if (product.stock === 0) {
       return;
@@ -77,6 +84,7 @@ function Button(props: Props) {
         inCart: 1,
       };
       saveCartToLocalStorage([newProduct]);
+      setAmountOfProducts(1);
     }
   };
 

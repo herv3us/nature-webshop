@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../models/Product';
 import { saveCartToLocalStorage } from '../services/localStorageService';
+import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
+import { useRecoilState } from 'recoil';
 import DeleteBtn from './DeleteBtn';
 import styled from 'styled-components';
 interface Props {
@@ -13,6 +15,9 @@ interface Props {
 function CartProductInfo(props: Props) {
   const { product, cart, setProductsInCart, setCart } = props;
   const [thisProduct, setThisProduct] = useState(product);
+  const [amountOfProducts, setAmountOfProducts] = useRecoilState(
+    amountOfProductsInCartState
+  );
 
   const decrease = (e: any, product: Product) => {
     e.preventDefault();
@@ -29,6 +34,7 @@ function CartProductInfo(props: Props) {
       });
       setCart(updateCart);
       setProductsInCart(updateCart);
+      setAmountOfProducts(amountOfProducts - 1);
     }
   };
 
@@ -47,6 +53,7 @@ function CartProductInfo(props: Props) {
       });
       setCart(updateCart);
       setProductsInCart(updateCart);
+      setAmountOfProducts(amountOfProducts + 1);
     }
   };
 

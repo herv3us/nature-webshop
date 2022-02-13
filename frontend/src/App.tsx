@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import StartPage from './pages/StartPage';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
@@ -16,21 +17,23 @@ function App() {
   ];
 
   return (
-    <Router>
-      <Wrapper>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<StartPage src={srcVideo[0]} />} />
-          <Route
-            path="/backpack"
-            element={<BackpackPage src={srcVideo[1]} />}
-          />
-          <Route path="/jacket" element={<JacketPage src={srcVideo[2]} />} />
-          <Route path="/shoes" element={<ShoesPage src={srcVideo[3]} />} />
-          <Route path="/mypage" element={<LoginPage />} />
-        </Routes>
-      </Wrapper>
-    </Router>
+    <RecoilRoot>
+      <Router>
+        <Wrapper>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<StartPage src={srcVideo[0]} />} />
+            <Route
+              path="/backpack"
+              element={<BackpackPage src={srcVideo[1]} />}
+            />
+            <Route path="/jacket" element={<JacketPage src={srcVideo[2]} />} />
+            <Route path="/shoes" element={<ShoesPage src={srcVideo[3]} />} />
+            <Route path="/mypage" element={<LoginPage />} />
+          </Routes>
+        </Wrapper>
+      </Router>
+    </RecoilRoot>
   );
 }
 
