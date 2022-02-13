@@ -10,7 +10,6 @@ function Navbar() {
   const navigate = useNavigate();
   const [amountOfProducts] = useRecoilState(amountOfProductsInCartState);
 
-  console.log(amountOfProducts);
   return (
     <StyledNavbar>
       <div>
@@ -30,31 +29,45 @@ function Navbar() {
             </MyPages>
           </li>
         ) : (
-          <CartWrapper>
-            <li onClick={() => navigate('/mypage')}>Logga in</li>
-            {amountOfProducts > 0 ? <Amount>{amountOfProducts}</Amount> : null}
-          </CartWrapper>
+          <li onClick={() => navigate('/mypage')}>Logga in</li>
         )}
       </StyledUl>
+      {amountOfProducts > 0 ? (
+        <AmountWrapper>
+          <p>🛒</p> <Amount>{amountOfProducts}</Amount>
+        </AmountWrapper>
+      ) : null}
     </StyledNavbar>
   );
 }
 
 export default Navbar;
 
-const CartWrapper = styled.div`
-  position: relative;
+const Amount = styled.small`
+  color: #353535;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  left: 7px;
+  opacity: 80%;
+  font-weight: bold;
 `;
 
-const Amount = styled.p`
-  background-color: #fff;
-  color: black;
-  font-size: 1.6rem;
-  padding: 1rem;
+const AmountWrapper = styled.div`
+  font-size: 1.2rem;
   position: absolute;
-  top: 100px;
-  left: 200px;
-  z-index: 1500;
+  top: 15px;
+  right: 60px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  z-index: 100;
+
+  p {
+    opacity: 50%;
+  }
 `;
 
 const MyPages = styled.div`

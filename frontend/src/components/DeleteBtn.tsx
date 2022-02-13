@@ -1,6 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 import { Product } from '../models/Product';
+import styled from 'styled-components';
+import { isTemplateExpression } from 'typescript';
 
 interface Props {
   product: Product;
@@ -11,20 +13,30 @@ interface Props {
 
 function DeleteBtn(props: Props) {
   const { product, cart, setCart, setProductsInCart } = props;
+  const [amountOfProducts, setAmountOfProducts] = useRecoilState(
+    amountOfProductsInCartState
+  );
 
   const deleteProduct = (e: any, product: Product) => {
     e.preventDefault();
     if (cart && cart.length > 1) {
+      const foundProduct = cart.find((item) => item.id === product.id);
+      if (foundProduct) {
+        setAmountOfProducts(amountOfProducts - foundProduct.inCart);
+      }
+
       const i = cart?.findIndex((item) => item.id === product.id);
       if (i !== -1) {
         cart.splice(i, 1);
       }
+
       setCart([...cart]);
       setProductsInCart([...cart]);
     } else if (cart.length === 1) {
       setCart(null);
       setProductsInCart(null);
       localStorage.removeItem('cart');
+      setAmountOfProducts(0);
     }
   };
 
