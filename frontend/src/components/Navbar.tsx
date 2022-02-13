@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { getTokenFromLocalStorage } from '../services/localStorageService';
+import { MdPerson } from 'react-icons/md';
+import { MdEmojiNature } from 'react-icons/md';
+import styled from 'styled-components';
 
 function Navbar() {
   const token = getTokenFromLocalStorage();
@@ -10,7 +12,7 @@ function Navbar() {
     <StyledNavbar>
       <div>
         <li onClick={() => navigate('/')} title="Startsida" className="home">
-          ⛺
+          <MdEmojiNature color="#476647f4" />
         </li>
       </div>
       <StyledUl>
@@ -19,7 +21,10 @@ function Navbar() {
         <li onClick={() => navigate('/backpack')}>Ryggsäckar</li>
         {token ? (
           <li onClick={() => navigate('/mypage')} className="myPage">
-            Mina sidor
+            <MyPages>
+              <MdPerson fontSize="1.2rem" />
+              <span>Mina Sidor</span>
+            </MyPages>
           </li>
         ) : (
           <li onClick={() => navigate('/mypage')}>Logga in</li>
@@ -30,6 +35,17 @@ function Navbar() {
 }
 
 export default Navbar;
+
+const MyPages = styled.div`
+  border-bottom: 1px solid transparent !important;
+  span {
+    margin-left: 4px;
+
+    &:hover {
+      border-bottom: 1px solid #476647b7;
+    }
+  }
+`;
 
 const StyledNavbar = styled.nav`
   display: flex;
@@ -47,6 +63,10 @@ const StyledNavbar = styled.nav`
     font-size: 3.5rem;
     padding: 0;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.02);
+    }
   }
 
   div {
@@ -81,8 +101,9 @@ const StyledUl = styled.ul`
 
   .myPage {
     color: #476647f4;
+
     &:hover {
-      border-bottom: 1px solid #476647b7;
+      border: none;
     }
   }
   .cart:hover {

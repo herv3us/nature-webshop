@@ -1,5 +1,6 @@
 import { getUserFromLocalStorage } from '../services/localStorageService';
 import { useEffect, useState } from 'react';
+import { MdLocationOn, MdPersonOutline } from 'react-icons/md';
 import { Wrapper, Content } from '../styling/MyPage.styled';
 import styled from 'styled-components';
 
@@ -32,10 +33,15 @@ function UserInformation() {
 
         <UserInfo>
           <p>Username: {user?.username}</p>
-          <p>
-            Namn: {user?.firstName} {user?.lastName}
-          </p>
-          <p>Adress: {user?.address}</p>
+          <IconWrapper>
+            <MdPersonOutline />
+            <span>
+              Namn: {user?.firstName} {user?.lastName}
+            </span>
+          </IconWrapper>
+          <IconWrapper>
+            <MdLocationOn /> <span>Adress: {user?.address}</span>
+          </IconWrapper>
           <p>Postnummer: {user?.zipCode}</p>
           <p>Ort: {user?.city}</p>
         </UserInfo>
@@ -57,4 +63,14 @@ const UserInfo = styled.div`
   border-radius: 0.2rem;
   margin-top: 1rem;
   padding: 1rem 1.5rem;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  span {
+    margin-left: 4px;
+  }
 `;

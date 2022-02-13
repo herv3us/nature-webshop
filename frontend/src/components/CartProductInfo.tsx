@@ -1,8 +1,8 @@
-import { Product } from '../models/Product';
-import styled from 'styled-components';
-import { saveCartToLocalStorage } from '../services/localStorageService';
 import { useEffect, useState } from 'react';
+import { Product } from '../models/Product';
+import { saveCartToLocalStorage } from '../services/localStorageService';
 import DeleteBtn from './DeleteBtn';
+import styled from 'styled-components';
 interface Props {
   product: Product;
   cart: Product[];

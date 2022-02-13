@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { getAllProducts } from './../services/productService';
 import { Product } from './../models/Product';
 import { search } from '../utils/search';
+import { filterProducts } from '../utils/filterProducts';
 import Header from './../components/Header';
 import SearchForm from '../components/SearchForm';
 import ProductCardMini from '../components/ProductCardMini';
 import styled from 'styled-components';
 import { WrapperUl } from '../styling/WrapperUl.styled';
-import { filterProducts } from '../utils/filterProducts';
 
 interface Props {
   src: string;
@@ -37,7 +37,7 @@ function StartPage({ src }: Props) {
     <Wrapper>
       <Header
         src={src}
-        title={'Welcome to Nature ⛺'}
+        title={'Welcome to Nature'}
         subtitle={'Your adventure starts here.'}
       />
       {!isLoaded ? (
