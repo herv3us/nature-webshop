@@ -1,22 +1,35 @@
 import Cart from '../components/Cart';
 import LoginForm from '../components/LoginForm';
 import UserInformation from '../components/UserInformation';
-import { getTokenFromLocalStorage } from '../services/localStorageService';
+import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../services/localStorageService';
 import styled from 'styled-components';
 import LogoutBtn from '../components/LogoutBtn';
+import CreateProduct from '../components/admin/CreateProduct';
 
 function LoginPage() {
   const token = getTokenFromLocalStorage();
+  const user = getUserFromLocalStorage();
 
   return (
     <div>
       {!token && <LoginForm />}
 
-      {token && (
+      {token && user?.role === 'customer' && (
         <Wrapper>
           <LogoutBtn />
           <UserInformation />
           <Cart />
+        </Wrapper>
+      )}
+
+      {token && user?.role === 'admin' && (
+        <Wrapper>
+          <LogoutBtn />
+          <UserInformation />
+          <CreateProduct />
         </Wrapper>
       )}
     </div>

@@ -6,9 +6,13 @@ import {
 } from '../../services/localStorageService';
 import { products, singleProduct } from '../../dummyData/products';
 import userEvent from '@testing-library/user-event';
+import { RecoilRoot } from 'recoil';
+import { RecoilObserver } from '../admin/tests/RecoilObserver';
+import { amountOfProductsInCartState } from '../../atoms/amountOfProductsInCartState';
 
 const setProductsInCartMock = jest.fn();
 const setCartMock = jest.fn();
+const onChange = jest.fn();
 
 jest.mock('../../services/localStorageService', () => {
   return {
@@ -28,23 +32,35 @@ describe('Tests for CartProductInfo', () => {
 
   it('render without crashing', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
   });
 
   it('render product-title', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
 
     const title = screen.getByText(singleProduct.title);
@@ -53,12 +69,18 @@ describe('Tests for CartProductInfo', () => {
 
   it('render the price of the product', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
 
     const price = screen.queryByText(
@@ -69,12 +91,18 @@ describe('Tests for CartProductInfo', () => {
 
   it('render the stock of the product', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
 
     const stock = screen.queryByText(`Kvar i lager: ${singleProduct.stock}`);
@@ -83,12 +111,18 @@ describe('Tests for CartProductInfo', () => {
 
   it('adds more of the product when clicking the +button', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
 
     const button = screen.getByRole('button', { name: '+' });
@@ -99,12 +133,18 @@ describe('Tests for CartProductInfo', () => {
 
   it('decreases the amount of the product when clicking -button', () => {
     render(
-      <CartProductInfo
-        product={singleProduct}
-        cart={products}
-        setProductsInCart={setProductsInCartMock}
-        setCart={setCartMock}
-      />
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <CartProductInfo
+          product={singleProduct}
+          cart={products}
+          setProductsInCart={setProductsInCartMock}
+          setCart={setCartMock}
+        />
+      </RecoilRoot>
     );
 
     const button = screen.getByRole('button', { name: '-' });

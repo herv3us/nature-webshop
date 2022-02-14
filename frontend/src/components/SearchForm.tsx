@@ -26,8 +26,16 @@ const StyledSearch = styled.input`
   padding: 0.5rem 2rem;
   width: 30%;
   position: absolute;
-  top: -50px;
+  top: -35px;
   left: 35px;
+
+  @media (max-width: 860px) {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
 
   &:focus {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);

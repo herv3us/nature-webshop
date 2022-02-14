@@ -1,18 +1,25 @@
 import ProductCardMini from '../ProductCardMini';
 import { render, screen } from '@testing-library/react';
-import { singleProduct } from './../../dummyData/products';
+import { products, singleProduct } from './../../dummyData/products';
 import {
   getUserFromLocalStorage,
   getTokenFromLocalStorage,
+  getCartFromLocalStorage,
 } from '../../services/localStorageService';
 import { user, userAdmin } from '../../dummyData/user';
+import { RecoilRoot } from 'recoil';
+import { amountOfProductsInCartState } from '../../atoms/amountOfProductsInCartState';
+import { RecoilObserver } from '../admin/tests/RecoilObserver';
 
 jest.mock('../../services/localStorageService', () => {
   return {
     getUserFromLocalStorage: jest.fn() as jest.Mock,
     getTokenFromLocalStorage: jest.fn() as jest.Mock,
+    getCartFromLocalStorage: jest.fn() as jest.Mock,
   };
 });
+
+const onChange = jest.fn();
 
 describe('Tests for ProductCardMini', () => {
   it('it render without crashing', () => {
@@ -49,7 +56,16 @@ describe('Tests for ProductCardMini', () => {
       () => 'token'
     );
 
-    render(<ProductCardMini product={singleProduct} />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <ProductCardMini product={singleProduct} />
+      </RecoilRoot>
+    );
+
     const button = screen.getByRole('button', { name: 'Köp' });
     expect(button).toBeInTheDocument();
   });
@@ -62,7 +78,15 @@ describe('Tests for ProductCardMini', () => {
       () => 'token'
     );
 
-    render(<ProductCardMini product={singleProduct} />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <ProductCardMini product={singleProduct} />
+      </RecoilRoot>
+    );
     const button = screen.getByRole('button', { name: 'Redigera' });
     expect(button).toBeInTheDocument();
   });

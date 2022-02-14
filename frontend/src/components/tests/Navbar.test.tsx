@@ -1,10 +1,12 @@
 import Navbar from '../Navbar';
 import { render, screen, waitFor } from '@testing-library/react';
 import { getTokenFromLocalStorage } from '../../services/localStorageService';
+import { amountOfProductsInCartState } from '../../atoms/amountOfProductsInCartState';
+import { RecoilObserver } from '../admin/tests/RecoilObserver';
 import userEvent from '@testing-library/user-event';
+import { RecoilRoot } from 'recoil';
 
 const mockNavigator = jest.fn();
-
 jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigator,
 }));
@@ -16,42 +18,82 @@ jest.mock('../../services/localStorageService', () => {
 });
 
 describe('Tests for Navbar', () => {
-  it('render without crashing', () => {
-    render(<Navbar />);
-  });
+  const onChange = jest.fn();
 
-  it('render a logo', () => {
-    render(<Navbar />);
-    const logo = screen.getByText('⛺');
-    expect(logo).toBeInTheDocument();
+  it('render without crashing', () => {
+    <RecoilRoot>
+      <RecoilObserver node={amountOfProductsInCartState} onChange={onChange} />
+      <Navbar />
+    </RecoilRoot>;
   });
 
   it('render the link for the jacket-page', () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
+
     const jacketlink = screen.getByText(/jackor/i);
     expect(jacketlink).toBeInTheDocument();
   });
 
   it('render the link for the backpack-page', () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const backpacklink = screen.getByText(/Ryggsäckar/i);
     expect(backpacklink).toBeInTheDocument();
   });
 
   it('render the link for the shoes-page', () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const shoelink = screen.getByText(/skor/i);
     expect(shoelink).toBeInTheDocument();
   });
 
   it('render the link for Login', () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const login = screen.getByText(/Logga in/i);
     expect(login).toBeInTheDocument();
   });
 
   it('navigate to jacketpage when clicking the link', async () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const jackets = screen.getByText(/Jackor/i);
     userEvent.click(jackets);
 
@@ -61,7 +103,15 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to backpackPage when clicking the link', async () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const backpack = screen.getByText(/Ryggsäckar/i);
     userEvent.click(backpack);
 
@@ -71,7 +121,15 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to shoesPage when clicking the link', async () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const shoes = screen.getByText(/Skor/i);
     userEvent.click(shoes);
 
@@ -81,7 +139,15 @@ describe('Tests for Navbar', () => {
   });
 
   it('navigate to "LoginPage" when clicking the Login-link', async () => {
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const myPage = screen.getByText(/Logga in/i);
     userEvent.click(myPage);
 
@@ -94,7 +160,15 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const login = screen.getByText(/Mina sidor/i);
     expect(login).toBeInTheDocument();
   });
@@ -103,7 +177,15 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
-    render(<Navbar />);
+    render(
+      <RecoilRoot>
+        <RecoilObserver
+          node={amountOfProductsInCartState}
+          onChange={onChange}
+        />
+        <Navbar />
+      </RecoilRoot>
+    );
     const myPage = screen.getByText(/Mina sidor/i);
     userEvent.click(myPage);
 
