@@ -23,6 +23,11 @@ jest.mock('../../services/localStorageService', () => {
   };
 });
 
+const mockNavigator = jest.fn();
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigator,
+}));
+
 describe('Tests for Button-component', () => {
   const onChange = jest.fn();
 

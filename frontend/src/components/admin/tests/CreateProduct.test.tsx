@@ -2,6 +2,11 @@ import CreateProduct from '../CreateProduct';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+const mockNavigator = jest.fn();
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigator,
+}));
+
 describe('Tests for CreateProduct', () => {
   it('render without crashing', () => {
     render(<CreateProduct />);

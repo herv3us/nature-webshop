@@ -7,6 +7,7 @@ import JacketPage from './pages/JacketPage';
 import BackpackPage from './pages/BackpackPage';
 import ShoesPage from './pages/ShoesPage';
 import styled from 'styled-components';
+import EditProduct from './components/admin/EditProduct';
 
 function App() {
   const srcVideo: string[] = [
@@ -30,6 +31,7 @@ function App() {
             <Route path="/jacket" element={<JacketPage src={srcVideo[2]} />} />
             <Route path="/shoes" element={<ShoesPage src={srcVideo[3]} />} />
             <Route path="/mypage" element={<LoginPage />} />
+            <Route path="/products/:id/edit" element={<EditProduct />} />
           </Routes>
         </Wrapper>
       </Router>

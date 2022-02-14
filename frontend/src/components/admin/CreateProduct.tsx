@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getTokenFromLocalStorage,
   getUserFromLocalStorage,
@@ -21,6 +22,8 @@ import {
 } from '../../utils/Validations';
 
 function CreateProduct() {
+  const [success, setSuccess] = useState(false);
+
   const [title, setTitle] = useState('');
   const [titleIsValid, setTitleIsValid] = useState(false);
   const [titleMessage, setTitleMessage] = useState('');
@@ -113,6 +116,8 @@ function CreateProduct() {
     stockIsValid &&
     categoryIsValid;
 
+  const navigate = useNavigate();
+
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
     const token = getTokenFromLocalStorage();
@@ -134,106 +139,113 @@ function CreateProduct() {
     const newProduct = await createProduct(productObj, token as string);
 
     if (newProduct.success === true) {
-      console.log(newProduct.product + ' är nu till-lagd');
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     }
   };
 
-  return (
-    <Form onSubmit={onSubmitHandler}>
-      <h2>Skapa ny produkt</h2>
-      <Content>
-        <InputWrapper>
-          <label>Produktnamn</label>
-          <IconWrapper>
-            <span>{titleIcon}</span>
-            <input
-              type="text"
-              placeholder="Produktnamn"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              onBlur={onBlurTitleHandler}
-            />
-          </IconWrapper>
-          <small>{titleMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>Beskrivning</label>
-          <IconWrapper>
-            <span>{descriptionIcon}</span>
-            <textarea
-              placeholder="Beskrivning av produkten"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              onBlur={onBlurDescriptionHandler}
-            ></textarea>
-          </IconWrapper>
-          <small>{descriptionMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>Produktbild</label>
-          <IconWrapper>
-            <span>{imgIcon}</span>
-            <input
-              type="text"
-              placeholder="URL till produktbild"
-              value={img}
-              onChange={(e) => setImg(e.target.value)}
-              onBlur={onBlurImgHandler}
-            />
-          </IconWrapper>
-          <small>{imgMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>Kategori</label>
-          <IconWrapper>
-            <span>{categoryIcon}</span>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              onBlur={onBlurCategoryHandler}
-            >
-              <option value="choose">Välj kategori</option>
-              <option value="jacket">Jacka</option>
-              <option value="backpack">Ryggsäck</option>
-              <option value="shoes">Skor</option>
-            </select>
-          </IconWrapper>
-          <small>{categoryMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>Pris</label>
-          <IconWrapper>
-            <span>{priceIcon}</span>
-            <input
-              type="number"
-              placeholder="Pris"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              onBlur={onBlurPriceHandler}
-            />
-          </IconWrapper>
-          <small>{priceMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>I lager</label>
-          <IconWrapper>
-            <span>{stockIcon}</span>
-            <input
-              type="number"
-              placeholder="Antal i lager"
-              value={stock}
-              onChange={(e) => setStock(e.target.value)}
-              onBlur={onBlurStockHandler}
-            />
-          </IconWrapper>
-          <small>{stockMessage}</small>
-        </InputWrapper>
-      </Content>
-      <Button type="submit" disabled={!formIsValid}>
-        Skapa produkt
-      </Button>
-    </Form>
-  );
+  if (!success) {
+    return (
+      <Form onSubmit={onSubmitHandler}>
+        <h2>Skapa ny produkt</h2>
+        <Content>
+          <InputWrapper>
+            <label>Produktnamn</label>
+            <IconWrapper>
+              <span>{titleIcon}</span>
+              <input
+                type="text"
+                placeholder="Produktnamn"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={onBlurTitleHandler}
+              />
+            </IconWrapper>
+            <small>{titleMessage}</small>
+          </InputWrapper>
+          <InputWrapper>
+            <label>Beskrivning</label>
+            <IconWrapper>
+              <span>{descriptionIcon}</span>
+              <textarea
+                placeholder="Beskrivning av produkten"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                onBlur={onBlurDescriptionHandler}
+              ></textarea>
+            </IconWrapper>
+            <small>{descriptionMessage}</small>
+          </InputWrapper>
+          <InputWrapper>
+            <label>Produktbild</label>
+            <IconWrapper>
+              <span>{imgIcon}</span>
+              <input
+                type="text"
+                placeholder="URL till produktbild"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+                onBlur={onBlurImgHandler}
+              />
+            </IconWrapper>
+            <small>{imgMessage}</small>
+          </InputWrapper>
+          <InputWrapper>
+            <label>Kategori</label>
+            <IconWrapper>
+              <span>{categoryIcon}</span>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                onBlur={onBlurCategoryHandler}
+              >
+                <option value="choose">Välj kategori</option>
+                <option value="jacket">Jacka</option>
+                <option value="backpack">Ryggsäck</option>
+                <option value="shoes">Skor</option>
+              </select>
+            </IconWrapper>
+            <small>{categoryMessage}</small>
+          </InputWrapper>
+          <InputWrapper>
+            <label>Pris</label>
+            <IconWrapper>
+              <span>{priceIcon}</span>
+              <input
+                type="number"
+                placeholder="Pris"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                onBlur={onBlurPriceHandler}
+              />
+            </IconWrapper>
+            <small>{priceMessage}</small>
+          </InputWrapper>
+          <InputWrapper>
+            <label>I lager</label>
+            <IconWrapper>
+              <span>{stockIcon}</span>
+              <input
+                type="number"
+                placeholder="Antal i lager"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+                onBlur={onBlurStockHandler}
+              />
+            </IconWrapper>
+            <small>{stockMessage}</small>
+          </InputWrapper>
+        </Content>
+        <Button type="submit" disabled={!formIsValid}>
+          Skapa produkt
+        </Button>
+      </Form>
+    );
+  } else {
+    return <p>Ny produkt skapad. Du skickas nu till startsidan.</p>;
+  }
 }
 
 export default CreateProduct;

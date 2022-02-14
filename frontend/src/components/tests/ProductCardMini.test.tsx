@@ -19,6 +19,11 @@ jest.mock('../../services/localStorageService', () => {
   };
 });
 
+const mockNavigator = jest.fn();
+jest.mock('react-router-dom', () => ({
+  useNavigate: () => mockNavigator,
+}));
+
 const onChange = jest.fn();
 
 describe('Tests for ProductCardMini', () => {

@@ -8,6 +8,7 @@ import {
 import { Product } from '../models/Product';
 import styled from 'styled-components';
 import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   product: Product;
@@ -22,6 +23,7 @@ function Button(props: Props) {
   const [amountOfProducts, setAmountOfProducts] = useRecoilState(
     amountOfProductsInCartState
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -95,7 +97,9 @@ function Button(props: Props) {
       addToCart(product);
     } else if (user?.role === 'admin') {
       console.log('you want to edit this product');
+      console.log(product.id);
       // navigera admin till en sida där man kan uppdatera produkten
+      navigate(`/products/${product.id}/edit`);
     }
   };
 

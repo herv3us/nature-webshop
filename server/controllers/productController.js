@@ -25,7 +25,7 @@ const getProductById = async (req, res, next) => {
     }
 
     res.status(200).json({
-      sccuess: true,
+      success: true,
       product: product,
     });
   } catch (err) {
