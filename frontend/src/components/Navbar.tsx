@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { getTokenFromLocalStorage } from '../services/localStorageService';
+import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../services/localStorageService';
 import { MdPerson, MdEmojiNature } from 'react-icons/md';
 import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 import { useRecoilState } from 'recoil';
@@ -7,6 +10,7 @@ import styled from 'styled-components';
 
 function Navbar() {
   const token = getTokenFromLocalStorage();
+  const user = getUserFromLocalStorage();
   const navigate = useNavigate();
   const [amountOfProducts] = useRecoilState(amountOfProductsInCartState);
 
@@ -21,15 +25,23 @@ function Navbar() {
         <li onClick={() => navigate('/jacket')}>Jackor</li>
         <li onClick={() => navigate('/shoes')}>Skor</li>
         <li onClick={() => navigate('/backpack')}>Ryggsäckar</li>
-        {token ? (
+        {!token && <li onClick={() => navigate('/mypage')}>Logga in</li>}
+
+        {token && user?.role === 'customer' && (
           <li onClick={() => navigate('/mypage')} className="myPage">
             <MyPages>
               <MdPerson fontSize="1.2rem" />
-              <span>Mina Sidor</span>
+              <span>Mina sidor</span>
             </MyPages>
           </li>
-        ) : (
-          <li onClick={() => navigate('/mypage')}>Logga in</li>
+        )}
+
+        {token && user?.role === 'admin' && (
+          <li onClick={() => navigate('/mypage')} className="myPage">
+            <MyPages>
+              <span>Admin</span>
+            </MyPages>
+          </li>
         )}
       </StyledUl>
       {amountOfProducts > 0 ? (

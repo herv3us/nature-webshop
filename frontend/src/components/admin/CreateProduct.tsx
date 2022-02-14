@@ -134,7 +134,7 @@ function CreateProduct() {
     const newProduct = await createProduct(productObj, token as string);
 
     if (newProduct.success === true) {
-      console.log(newProduct + ' Är nu till-lagd');
+      console.log(newProduct.product + ' är nu till-lagd');
     }
   };
 
