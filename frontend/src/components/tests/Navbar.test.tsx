@@ -1,10 +1,14 @@
 import Navbar from '../Navbar';
 import { render, screen, waitFor } from '@testing-library/react';
-import { getTokenFromLocalStorage } from '../../services/localStorageService';
+import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../../services/localStorageService';
 import { amountOfProductsInCartState } from '../../atoms/amountOfProductsInCartState';
 import { RecoilObserver } from '../admin/tests/RecoilObserver';
 import userEvent from '@testing-library/user-event';
 import { RecoilRoot } from 'recoil';
+import { user, userAdmin } from '../../dummyData/user';
 
 const mockNavigator = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -14,6 +18,7 @@ jest.mock('react-router-dom', () => ({
 jest.mock('../../services/localStorageService', () => {
   return {
     getTokenFromLocalStorage: jest.fn() as jest.Mock,
+    getUserFromLocalStorage: jest.fn() as jest.Mock,
   };
 });
 
@@ -160,6 +165,7 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
+    (getUserFromLocalStorage as jest.Mock<any>).mockImplementation(() => user);
     render(
       <RecoilRoot>
         <RecoilObserver
@@ -177,6 +183,8 @@ describe('Tests for Navbar', () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
+    (getUserFromLocalStorage as jest.Mock<any>).mockImplementation(() => user);
+
     render(
       <RecoilRoot>
         <RecoilObserver
