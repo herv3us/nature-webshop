@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import {
+  Form,
+  Content,
+  IconWrapper,
+  InputWrapper,
+  Button,
+} from '../../styling/CreateProduct.styled';
 import {
   isValidProductName,
   isValidDescription,
   isValidImage,
   isValidPrice,
   isValidStock,
+  isValidCategory,
 } from '../../utils/Validations';
 
 function CreateProduct() {
@@ -66,7 +73,7 @@ function CreateProduct() {
   };
 
   const [stock, setStock] = useState('');
-  const [stockisValid, setStockIsValid] = useState(false);
+  const [stockIsValid, setStockIsValid] = useState(false);
   const [stockMessage, setStockMessage] = useState('');
   const [stockIcon, setStockIcon] = useState('');
   const [stockIsVisited, setStockIsVisited] = useState(false);
@@ -78,6 +85,28 @@ function CreateProduct() {
     setStockIcon(icon);
     setStockMessage(message);
   };
+
+  const [category, setCategory] = useState('choose');
+  const [categoryIsValid, setCategoryIsValid] = useState(false);
+  const [categoryMessage, setCategoryMessage] = useState('');
+  const [categoryIcon, setCategoryIcon] = useState('');
+  const [categoryIsVisited, setCategoryIsVisited] = useState(false);
+
+  const onBlurCategoryHandler = () => {
+    const [isValid, icon, message] = isValidCategory(category);
+    setCategoryIsVisited(true);
+    setCategoryIsValid(isValid);
+    setCategoryIcon(icon);
+    setCategoryMessage(message);
+  };
+
+  const formIsValid =
+    titleIsValid &&
+    descriptionIsValid &&
+    imgIsValid &&
+    priceIsValid &&
+    stockIsValid &&
+    categoryIsValid;
 
   return (
     <Form>
@@ -125,6 +154,23 @@ function CreateProduct() {
           <small>{imgMessage}</small>
         </InputWrapper>
         <InputWrapper>
+          <label>Kategori</label>
+          <IconWrapper>
+            <span>{categoryIcon}</span>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              onBlur={onBlurCategoryHandler}
+            >
+              <option value="choose">Välj kategori</option>
+              <option value="jacket">Jacka</option>
+              <option value="backpack">Ryggsäck</option>
+              <option value="shoes">Skor</option>
+            </select>
+          </IconWrapper>
+          <small>{categoryMessage}</small>
+        </InputWrapper>
+        <InputWrapper>
           <label>Pris</label>
           <IconWrapper>
             <span>{priceIcon}</span>
@@ -152,115 +198,12 @@ function CreateProduct() {
           </IconWrapper>
           <small>{stockMessage}</small>
         </InputWrapper>
-        <InputWrapper>
-          <label>Kategori</label>
-          <select>
-            <option value="jacket">Jacka</option>
-            <option value="backpack">Ryggsäck</option>
-            <option value="shoes">Skor</option>
-          </select>
-        </InputWrapper>
       </Content>
-      <Button type="submit">Skapa produkt</Button>
+      <Button type="submit" disabled={!formIsValid}>
+        Skapa produkt
+      </Button>
     </Form>
   );
 }
 
 export default CreateProduct;
-
-const Form = styled.form`
-  color: #353535;
-  background-color: #fff;
-  border-radius: 0.4rem;
-  padding: 1rem 1rem 4rem;
-  width: 500px;
-  position: relative;
-
-  h2 {
-    font-size: 2rem;
-    text-align: center;
-  }
-`;
-
-const Content = styled.div`
-  background-color: #eee;
-  border-radius: 0.3rem;
-  padding: 1rem;
-`;
-
-const IconWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-right: 5px;
-  }
-
-  input,
-  textarea {
-    margin-right: 15px;
-  }
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-
-  .valid {
-    border: #eee solid 1px;
-  }
-
-  .invalid {
-    border: red solid 1px;
-  }
-
-  .error {
-    color: red;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    font-family: inherit;
-    resize: none;
-    border-radius: 0.3rem;
-    outline: none;
-    border: none;
-    padding: 0.3rem;
-
-    &:focus {
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-  }
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  color: #eee;
-  background-color: #476647e4;
-  border: 1px solid #476647e4;
-  border-radius: 3px;
-  font-weight: bold;
-  margin-top: 1rem;
-  padding: 0.2rem 0.9rem;
-  width: fit-content;
-  text-transform: uppercase;
-  transition: ease all 0.3s;
-  position: absolute;
-  right: 17px;
-
-  &:hover {
-    background-color: #5d915de3;
-    border: 1px solid #5d8b5de3;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-
-  &:focus {
-    transform: scale(0.99);
-  }
-`;

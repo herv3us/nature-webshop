@@ -49,11 +49,21 @@ export const isValidPrice = (price: string): [boolean, string, string] => {
 };
 
 export const isValidStock = (stock: string): [boolean, string, string] => {
-    if(stock.length === 0) {
-        return [false, '🛑', 'Fyll i antal i lager för produkten']
-    } else if (+stock === 0) {
-        return [false, '🛑', 'För lågt antal. Det måste finnas minst 1 i lager']
-    } else {
-        return [true, '💚', '']
-    }
-}
+  if (stock.length === 0) {
+    return [false, '🛑', 'Fyll i antal i lager för produkten'];
+  } else if (+stock === 0) {
+    return [false, '🛑', 'För lågt antal. Det måste finnas minst 1 i lager'];
+  } else {
+    return [true, '💚', ''];
+  }
+};
+
+export const isValidCategory = (
+  category: string
+): [boolean, string, string] => {
+  if (category === 'choose') {
+    return [false, '🛑', 'Välj en kategori'];
+  } else {
+    return [true, '💚', ''];
+  }
+};
