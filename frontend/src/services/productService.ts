@@ -32,3 +32,17 @@ export const updateProduct = async (
   });
   return res.json();
 };
+
+export const createProduct = async (product: object, token: string) => {
+  const newProduct = await fetch('/api/products', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(product)
+  })
+
+  const productData = await newProduct.json()
+  return productData
+}

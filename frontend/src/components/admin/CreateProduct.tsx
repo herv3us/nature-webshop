@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../../services/localStorageService';
+import { createProduct } from '../../services/productService';
+import {
   Form,
   Content,
   IconWrapper,
@@ -108,8 +113,33 @@ function CreateProduct() {
     stockIsValid &&
     categoryIsValid;
 
+  const onSubmitHandler = async (e: any) => {
+    e.preventDefault();
+    const token = getTokenFromLocalStorage();
+    const admin = getUserFromLocalStorage();
+
+    if (!token && admin?.role !== 'admin') {
+      return;
+    }
+
+    const productObj = {
+      title,
+      category,
+      description,
+      imgUrl: img,
+      price: Number(price),
+      stock: Number(stock),
+    };
+
+    const newProduct = await createProduct(productObj, token as string);
+
+    if (newProduct.success === true) {
+      console.log(newProduct + ' Är nu till-lagd');
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmitHandler}>
       <h2>Skapa ny produkt</h2>
       <Content>
         <InputWrapper>
