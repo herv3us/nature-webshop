@@ -3,6 +3,8 @@ import {
   getTokenFromLocalStorage,
   getCartFromLocalStorage,
 } from '../services/localStorageService';
+import { useRecoilState } from 'recoil';
+import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 import { Product } from '../models/Product';
 import { updateProduct } from '../services/productService';
 
@@ -15,6 +17,9 @@ function PayButton(props: Props) {
   const { setIsOpen } = props;
   const cart = getCartFromLocalStorage();
   const token = getTokenFromLocalStorage();
+  const [amountOfProducts, setAmountOfProducts] = useRecoilState(
+    amountOfProductsInCartState
+  );
 
   const handleClick = async (e: any) => {
     e.preventDefault();
@@ -40,6 +45,7 @@ function PayButton(props: Props) {
     if (data.success) {
       console.log(data);
       setIsOpen(true);
+      setAmountOfProducts(0);
       localStorage.removeItem('cart');
     }
   };

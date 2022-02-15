@@ -21,6 +21,7 @@ import {
   isValidCategory,
 } from '../../utils/Validations';
 import styled from 'styled-components';
+import DeleteProduct from './DeleteProduct';
 
 function EditProduct() {
   const [success, setSuccess] = useState(false);
@@ -143,7 +144,7 @@ function EditProduct() {
     const admin = getUserFromLocalStorage();
 
     if (!token && admin?.role !== 'admin') {
-      return;
+      navigate('/');
     }
 
     const productObj = {
@@ -173,6 +174,7 @@ function EditProduct() {
     return (
       <Wrapper>
         <Form onSubmit={onSubmitHandler}>
+          <DeleteProduct id={id as string} />
           <h2>Uppdatera Produkt</h2>
           <Content>
             <InputWrapper>
@@ -282,5 +284,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
+  position: relative;
 `;

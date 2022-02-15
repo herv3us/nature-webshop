@@ -1,5 +1,5 @@
 import DeleteBtn from '../DeleteBtn';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { products, singleProduct } from '../../dummyData/products';
 import userEvent from '@testing-library/user-event';
 import { RecoilRoot } from 'recoil';
@@ -48,7 +48,7 @@ describe('Test for DeleteBtn', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('render calls the setCart funtion', () => {
+  it('render calls the setCart funtion', async () => {
     render(
       <RecoilRoot>
         <RecoilObserver
@@ -66,6 +66,8 @@ describe('Test for DeleteBtn', () => {
 
     const button = screen.getByRole('button', { name: 'X' });
     userEvent.click(button);
-    expect(setCartMock).toBeCalledTimes(1);
+    await waitFor(() => {
+      expect(setCartMock).toBeCalledTimes(1);
+    });
   });
 });

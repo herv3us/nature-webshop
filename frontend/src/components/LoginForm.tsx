@@ -80,7 +80,6 @@ function LoginForm() {
     const data = await login(username, password);
 
     if (!data) {
-      // console.log('No data found');
       return;
     } else if (data.success) {
       saveTokenInLocalStorage(data.token);

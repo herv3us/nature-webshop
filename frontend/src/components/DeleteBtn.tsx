@@ -2,7 +2,6 @@ import { useRecoilState } from 'recoil';
 import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 import { Product } from '../models/Product';
 import styled from 'styled-components';
-import { isTemplateExpression } from 'typescript';
 
 interface Props {
   product: Product;
@@ -29,9 +28,10 @@ function DeleteBtn(props: Props) {
       if (i !== -1) {
         cart.splice(i, 1);
       }
-
-      setCart([...cart]);
-      setProductsInCart([...cart]);
+      setTimeout(() => {
+        setCart([...cart]);
+        setProductsInCart([...cart]);
+      }, 200);
     } else if (cart.length === 1) {
       setCart(null);
       setProductsInCart(null);

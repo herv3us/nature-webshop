@@ -36,6 +36,7 @@ function CheckoutPopup(props: Props) {
                 ))}
               </ol>
               <p>kommer levereras till dig inom kort.</p>
+              <h3>Välkommen åter!</h3>
             </div>
           ) : (
             <div>

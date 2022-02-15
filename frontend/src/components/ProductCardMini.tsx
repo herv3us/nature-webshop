@@ -6,7 +6,6 @@ import {
 } from '../services/localStorageService';
 import ProductPopup from './ProductPopup';
 import Button from './Button';
-
 import styled from 'styled-components';
 interface Props {
   product: Product;
