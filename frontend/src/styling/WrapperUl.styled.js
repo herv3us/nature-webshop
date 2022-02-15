@@ -11,11 +11,11 @@ export const WrapperUl = styled.ul`
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 906px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 600px) {
     display: flex;
     flex-direction: column;
     justify-content: center;

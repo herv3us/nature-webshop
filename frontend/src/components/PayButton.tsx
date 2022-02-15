@@ -17,15 +17,13 @@ function PayButton(props: Props) {
   const { setIsOpen } = props;
   const cart = getCartFromLocalStorage();
   const token = getTokenFromLocalStorage();
-  const [amountOfProducts, setAmountOfProducts] = useRecoilState(
-    amountOfProductsInCartState
-  );
+  const [, setAmountOfProducts] = useRecoilState(amountOfProductsInCartState);
 
   const handleClick = async (e: any) => {
     e.preventDefault();
 
     cart?.map((product) => {
-      updateThisProduct(product);
+      return updateThisProduct(product);
     });
   };
 

@@ -48,7 +48,7 @@ function EditProduct() {
   const [titleIsValid, setTitleIsValid] = useState(false);
   const [titleMessage, setTitleMessage] = useState('');
   const [titleIcon, setTitleIcon] = useState('');
-  const [titileIsVisited, setTitleIsVisited] = useState(false);
+  const [, setTitleIsVisited] = useState(false);
 
   const onBlurTitleHandler = () => {
     const [isValid, icon, message] = isValidProductName(title);
@@ -62,7 +62,7 @@ function EditProduct() {
   const [descriptionIsValid, setDescriptionIsValid] = useState(false);
   const [descriptionMessage, setDescriptionMessage] = useState('');
   const [descriptionIcon, setDescriptionIcon] = useState('');
-  const [descriptionIsVisited, setDescriptionIsVisited] = useState(false);
+  const [, setDescriptionIsVisited] = useState(false);
 
   const onBlurDescriptionHandler = () => {
     const [isValid, icon, message] = isValidDescription(description);
@@ -76,7 +76,7 @@ function EditProduct() {
   const [imgIsValid, setImgIsValid] = useState(false);
   const [imgMessage, setImgMessage] = useState('');
   const [imgIcon, setImgIcon] = useState('');
-  const [imgIsVisited, setImgIsVisited] = useState(false);
+  const [, setImgIsVisited] = useState(false);
 
   const onBlurImgHandler = () => {
     const [isValid, icon, message] = isValidImage(img);
@@ -90,7 +90,7 @@ function EditProduct() {
   const [priceIsValid, setPriceIsValid] = useState(false);
   const [priceMessage, setPriceMessage] = useState('');
   const [priceIcon, setPriceIcon] = useState('');
-  const [priceIsVisited, setPriceIsVisited] = useState(false);
+  const [, setPriceIsVisited] = useState(false);
 
   const onBlurPriceHandler = () => {
     const [isValid, icon, message] = isValidPrice(price);
@@ -104,7 +104,7 @@ function EditProduct() {
   const [stockIsValid, setStockIsValid] = useState(false);
   const [stockMessage, setStockMessage] = useState('');
   const [stockIcon, setStockIcon] = useState('');
-  const [stockIsVisited, setStockIsVisited] = useState(false);
+  const [, setStockIsVisited] = useState(false);
 
   const onBlurStockHandler = () => {
     const [isValid, icon, message] = isValidStock(stock);
@@ -118,7 +118,7 @@ function EditProduct() {
   const [categoryIsValid, setCategoryIsValid] = useState(false);
   const [categoryMessage, setCategoryMessage] = useState('');
   const [categoryIcon, setCategoryIcon] = useState('');
-  const [categoryIsVisited, setCategoryIsVisited] = useState(false);
+  const [, setCategoryIsVisited] = useState(false);
 
   const onBlurCategoryHandler = () => {
     const [isValid, icon, message] = isValidCategory(category);

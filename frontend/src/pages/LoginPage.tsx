@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import LogoutBtn from '../components/LogoutBtn';
 import CreateProduct from '../components/admin/CreateProduct';
+import AdminInformation from '../components/admin/AdminInformation';
 
 function LoginPage() {
   const token = getTokenFromLocalStorage();
@@ -28,7 +29,7 @@ function LoginPage() {
       {token && user?.role === 'admin' && (
         <Wrapper>
           <LogoutBtn />
-          <UserInformation />
+          <AdminInformation />
           <CreateProduct />
         </Wrapper>
       )}

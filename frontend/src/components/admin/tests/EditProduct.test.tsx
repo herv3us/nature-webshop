@@ -38,4 +38,10 @@ describe('Tests for EditProduct', () => {
     const errorText = screen.getByText('Du måste fylla i ett produktnamn');
     expect(errorText).toBeInTheDocument();
   });
+
+  it('renders an sumbit button', () => {
+    render(<EditProduct />);
+    const button = screen.getByRole('button', { name: /uppdatera/i });
+    expect(button).toBeInTheDocument();
+  });
 });

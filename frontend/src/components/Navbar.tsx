@@ -3,10 +3,11 @@ import {
   getTokenFromLocalStorage,
   getUserFromLocalStorage,
 } from '../services/localStorageService';
-import { MdPerson, MdEmojiNature } from 'react-icons/md';
+import { MdPerson, MdSettings } from 'react-icons/md';
 import { amountOfProductsInCartState } from '../atoms/amountOfProductsInCartState';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import logo from '../img/nature.png';
 
 function Navbar() {
   const token = getTokenFromLocalStorage();
@@ -18,7 +19,7 @@ function Navbar() {
     <StyledNavbar>
       <div>
         <li onClick={() => navigate('/')} title="Startsida" className="home">
-          <MdEmojiNature color="#476647f4" />
+          <StyledLogo src={logo} alt="" />
         </li>
       </div>
       <StyledUl>
@@ -39,6 +40,7 @@ function Navbar() {
         {token && user?.role === 'admin' && (
           <li onClick={() => navigate('/mypage')} className="myPage">
             <MyPages>
+              <MdSettings />
               <span>Admin</span>
             </MyPages>
           </li>
@@ -54,6 +56,10 @@ function Navbar() {
 }
 
 export default Navbar;
+
+const StyledLogo = styled.img`
+  max-width: 120px;
+`;
 
 const Amount = styled.small`
   color: #353535;
