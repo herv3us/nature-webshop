@@ -93,12 +93,10 @@ function Button(props: Props) {
   const handleClick = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
+
     if (user?.role === 'customer') {
       addToCart(product);
     } else if (user?.role === 'admin') {
-      console.log('you want to edit this product');
-      console.log(product.id);
-      // navigera admin till en sida där man kan uppdatera produkten
       navigate(`/products/${product.id}/edit`);
     }
   };

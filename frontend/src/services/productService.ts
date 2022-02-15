@@ -44,5 +44,5 @@ export const createProduct = async (product: object, token: string) => {
   })
 
   const productData = await newProduct.json()
-  return productData
+  return productData;
 }

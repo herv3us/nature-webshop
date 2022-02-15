@@ -4,7 +4,7 @@ import {
   getTokenFromLocalStorage,
   getUserFromLocalStorage,
 } from '../../services/localStorageService';
-import { createProduct, getProductById } from '../../services/productService';
+import { getProductById, updateProduct } from '../../services/productService';
 import {
   Form,
   Content,
@@ -28,7 +28,7 @@ function EditProduct() {
 
   const getThisProduct = async () => {
     const res = await getProductById(id as string);
-    console.log(res);
+
     if (res.success) {
       setTitle(res.product.title);
       setCategory(res.product.category);
@@ -155,9 +155,13 @@ function EditProduct() {
       stock: Number(stock),
     };
 
-    const newProduct = await createProduct(productObj, token as string);
+    const updatedProduct = await updateProduct(
+      productObj,
+      id as string,
+      token as string
+    );
 
-    if (newProduct.success === true) {
+    if (updatedProduct.success === true) {
       setSuccess(true);
       setTimeout(() => {
         navigate('/');
