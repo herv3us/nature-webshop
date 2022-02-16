@@ -1,6 +1,12 @@
 import EditProduct from '../EditProduct';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import {
+  getTokenFromLocalStorage,
+  getUserFromLocalStorage,
+} from '../../../services/localStorageService';
+import { userAdmin } from '../../../dummyData/user';
 
 const mockNavigator = jest.fn();
 const mockParams = jest.fn();
@@ -8,6 +14,13 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigator,
   useParams: () => mockParams,
 }));
+
+jest.mock('../../../services/localStorageService', () => {
+  return {
+    getTokenFromLocalStorage: jest.fn() as jest.Mock,
+    getUserFromLocalStorage: jest.fn() as jest.Mock,
+  };
+});
 
 describe('Tests for EditProduct', () => {
   it('render without crashing', () => {
@@ -43,5 +56,23 @@ describe('Tests for EditProduct', () => {
     render(<EditProduct />);
     const button = screen.getByRole('button', { name: /uppdatera/i });
     expect(button).toBeInTheDocument();
+  });
+
+  it('redirect to startpage if successfully update product', async () => {
+    (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
+      () => 'token'
+    );
+    (getUserFromLocalStorage as jest.Mock<any>).mockImplementation(
+      () => userAdmin
+    );
+    render(<EditProduct />);
+    const button = screen.getByRole('button', { name: /uppdatera/i });
+    userEvent.click(button);
+
+    await waitFor(() => {
+      setTimeout(() => {
+        expect(mockNavigator).toHaveBeenCalledWith('/');
+      }, 3000);
+    });
   });
 });

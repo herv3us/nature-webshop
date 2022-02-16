@@ -117,6 +117,7 @@ function CreateProduct() {
     categoryIsValid;
 
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
@@ -140,8 +141,12 @@ function CreateProduct() {
 
     if (newProduct.success === true) {
       setSuccess(true);
+      setMessage(
+        `Produkten: ${newProduct.product.title}, finns nu i produktlistan`
+      );
       setTimeout(() => {
-        navigate('/');
+        // navigate('/');
+        window.location.reload();
       }, 3000);
     }
   };
@@ -244,7 +249,13 @@ function CreateProduct() {
       </Form>
     );
   } else {
-    return <p>Ny produkt skapad. Du skickas nu till startsidan.</p>;
+    return (
+      <Form>
+        <Content>
+          <p>{message}</p>
+        </Content>
+      </Form>
+    );
   }
 }
 

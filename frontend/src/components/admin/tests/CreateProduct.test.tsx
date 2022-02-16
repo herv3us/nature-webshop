@@ -63,7 +63,7 @@ describe('Tests for CreateProduct', () => {
     expect(mockNavigator).not.toHaveBeenCalledWith('/');
   });
 
-  it('redirect to startpage if successfully create new product', async () => {
+  it('reloaHahad the create-form if successfully create new product', async () => {
     (getTokenFromLocalStorage as jest.Mock<any>).mockImplementation(
       () => 'token'
     );
@@ -76,7 +76,8 @@ describe('Tests for CreateProduct', () => {
 
     await waitFor(() => {
       setTimeout(() => {
-        expect(mockNavigator).toHaveBeenCalledWith('/');
+        // expect(mockNavigator).toHaveBeenCalledWith('/');
+        expect(window.location.reload).toHaveBeenCalled();
       }, 3000);
     });
   });
