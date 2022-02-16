@@ -1,6 +1,7 @@
 import SearchForm from '../SearchForm';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import StartPage from '../../pages/StartPage';
 
 const setSearchStringMock = jest.fn();
 const searchStringMock = 'backpack';
