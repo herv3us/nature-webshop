@@ -33,6 +33,9 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Fyll i ett lösenord'],
     minlength: [8, 'Lösenordet måste vara minst 9 tecken.'],
   },
+  role: {
+    type: String,
+  },
 });
 
 userSchema.pre('save', async function (next) {

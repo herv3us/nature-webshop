@@ -32,7 +32,7 @@ const getUserById = async (req, res, next) => {
 
 const createUser = async (req, res, next) => {
   try {
-    const { username, firstName, lastName, address, zipCode, password } =
+    const { username, firstName, lastName, address, zipCode, city, password } =
       req.body;
 
     const user = await User.create({
@@ -42,8 +42,8 @@ const createUser = async (req, res, next) => {
       address,
       zipCode,
       password,
-      role: 'user',
-      cart: [],
+      city,
+      role: 'customer',
     });
 
     res.status(200).json({
