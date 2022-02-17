@@ -8,6 +8,7 @@ import BackpackPage from './pages/BackpackPage';
 import ShoesPage from './pages/ShoesPage';
 import styled from 'styled-components';
 import EditProduct from './components/admin/EditProduct';
+import Footer from './components/Footer';
 
 function App() {
   const srcVideo: string[] = [
@@ -33,6 +34,7 @@ function App() {
             <Route path="/mypage" element={<LoginPage />} />
             <Route path="/products/:id/edit" element={<EditProduct />} />
           </Routes>
+          <Footer />
         </Wrapper>
       </Router>
     </RecoilRoot>
@@ -43,6 +45,6 @@ export default App;
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 `;

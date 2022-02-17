@@ -157,10 +157,11 @@ function CreateProduct() {
         <h2>Skapa ny produkt</h2>
         <Content>
           <InputWrapper>
-            <label>Produktnamn</label>
+            <label htmlFor="title">Produktnamn</label>
             <IconWrapper>
               <span>{titleIcon}</span>
               <input
+                id="title"
                 type="text"
                 placeholder="Produktnamn"
                 value={title}
@@ -171,10 +172,11 @@ function CreateProduct() {
             <small>{titleMessage}</small>
           </InputWrapper>
           <InputWrapper>
-            <label>Beskrivning</label>
+            <label htmlFor="description">Beskrivning</label>
             <IconWrapper>
               <span>{descriptionIcon}</span>
               <textarea
+                id="description"
                 placeholder="Beskrivning av produkten"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -184,10 +186,11 @@ function CreateProduct() {
             <small>{descriptionMessage}</small>
           </InputWrapper>
           <InputWrapper>
-            <label>Produktbild</label>
+            <label htmlFor="productImg">Produktbild</label>
             <IconWrapper>
               <span>{imgIcon}</span>
               <input
+                id="productImg"
                 type="text"
                 placeholder="URL till produktbild"
                 value={img}
@@ -198,10 +201,11 @@ function CreateProduct() {
             <small>{imgMessage}</small>
           </InputWrapper>
           <InputWrapper>
-            <label>Kategori</label>
+            <label htmlFor="category">Kategori</label>
             <IconWrapper>
               <span>{categoryIcon}</span>
               <select
+                id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 onBlur={onBlurCategoryHandler}
@@ -215,10 +219,11 @@ function CreateProduct() {
             <small>{categoryMessage}</small>
           </InputWrapper>
           <InputWrapper>
-            <label>Pris</label>
+            <label htmlFor="price">Pris</label>
             <IconWrapper>
               <span>{priceIcon}</span>
               <input
+                id="price"
                 type="number"
                 placeholder="Pris"
                 value={price}
@@ -229,10 +234,11 @@ function CreateProduct() {
             <small>{priceMessage}</small>
           </InputWrapper>
           <InputWrapper>
-            <label>I lager</label>
+            <label htmlFor="stock">I lager</label>
             <IconWrapper>
               <span>{stockIcon}</span>
               <input
+                id="stock"
                 type="number"
                 placeholder="Antal i lager"
                 value={stock}

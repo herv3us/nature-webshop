@@ -48,7 +48,7 @@ function EditProduct() {
   const [titleIsValid, setTitleIsValid] = useState(false);
   const [titleMessage, setTitleMessage] = useState('');
   const [titleIcon, setTitleIcon] = useState('');
-  const [, setTitleIsVisited] = useState(false);
+  const [, setTitleIsVisited] = useState(true);
 
   const onBlurTitleHandler = () => {
     const [isValid, icon, message] = isValidProductName(title);
@@ -62,7 +62,7 @@ function EditProduct() {
   const [descriptionIsValid, setDescriptionIsValid] = useState(false);
   const [descriptionMessage, setDescriptionMessage] = useState('');
   const [descriptionIcon, setDescriptionIcon] = useState('');
-  const [, setDescriptionIsVisited] = useState(false);
+  const [, setDescriptionIsVisited] = useState(true);
 
   const onBlurDescriptionHandler = () => {
     const [isValid, icon, message] = isValidDescription(description);
@@ -76,7 +76,7 @@ function EditProduct() {
   const [imgIsValid, setImgIsValid] = useState(false);
   const [imgMessage, setImgMessage] = useState('');
   const [imgIcon, setImgIcon] = useState('');
-  const [, setImgIsVisited] = useState(false);
+  const [, setImgIsVisited] = useState(true);
 
   const onBlurImgHandler = () => {
     const [isValid, icon, message] = isValidImage(img);
@@ -90,7 +90,7 @@ function EditProduct() {
   const [priceIsValid, setPriceIsValid] = useState(false);
   const [priceMessage, setPriceMessage] = useState('');
   const [priceIcon, setPriceIcon] = useState('');
-  const [, setPriceIsVisited] = useState(false);
+  const [, setPriceIsVisited] = useState(true);
 
   const onBlurPriceHandler = () => {
     const [isValid, icon, message] = isValidPrice(price);
@@ -104,7 +104,7 @@ function EditProduct() {
   const [stockIsValid, setStockIsValid] = useState(false);
   const [stockMessage, setStockMessage] = useState('');
   const [stockIcon, setStockIcon] = useState('');
-  const [, setStockIsVisited] = useState(false);
+  const [, setStockIsVisited] = useState(true);
 
   const onBlurStockHandler = () => {
     const [isValid, icon, message] = isValidStock(stock);
@@ -118,7 +118,7 @@ function EditProduct() {
   const [categoryIsValid, setCategoryIsValid] = useState(false);
   const [categoryMessage, setCategoryMessage] = useState('');
   const [categoryIcon, setCategoryIcon] = useState('');
-  const [, setCategoryIsVisited] = useState(false);
+  const [, setCategoryIsVisited] = useState(true);
 
   const onBlurCategoryHandler = () => {
     const [isValid, icon, message] = isValidCategory(category);
@@ -178,10 +178,11 @@ function EditProduct() {
           <h2>Uppdatera Produkt</h2>
           <Content>
             <InputWrapper>
-              <label>Produktnamn</label>
+              <label htmlFor="title">Produktnamn</label>
               <IconWrapper>
                 <span>{titleIcon}</span>
                 <input
+                  id="title"
                   type="text"
                   placeholder="Produktnamn"
                   value={title}
@@ -192,10 +193,11 @@ function EditProduct() {
               <small>{titleMessage}</small>
             </InputWrapper>
             <InputWrapper>
-              <label>Beskrivning</label>
+              <label htmlFor="description">Beskrivning</label>
               <IconWrapper>
                 <span>{descriptionIcon}</span>
                 <textarea
+                  id="description"
                   placeholder="Beskrivning av produkten"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -205,10 +207,11 @@ function EditProduct() {
               <small>{descriptionMessage}</small>
             </InputWrapper>
             <InputWrapper>
-              <label>Produktbild</label>
+              <label htmlFor="productImg">Produktbild</label>
               <IconWrapper>
                 <span>{imgIcon}</span>
                 <input
+                  id="productImg"
                   type="text"
                   placeholder="URL till produktbild"
                   value={img}
@@ -219,10 +222,11 @@ function EditProduct() {
               <small>{imgMessage}</small>
             </InputWrapper>
             <InputWrapper>
-              <label>Kategori</label>
+              <label htmlFor="category">Kategori</label>
               <IconWrapper>
                 <span>{categoryIcon}</span>
                 <select
+                  id="category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                   onBlur={onBlurCategoryHandler}
@@ -236,10 +240,11 @@ function EditProduct() {
               <small>{categoryMessage}</small>
             </InputWrapper>
             <InputWrapper>
-              <label>Pris</label>
+              <label htmlFor="price">Pris</label>
               <IconWrapper>
                 <span>{priceIcon}</span>
                 <input
+                  id="price"
                   type="number"
                   placeholder="Pris"
                   value={price}
@@ -250,10 +255,11 @@ function EditProduct() {
               <small>{priceMessage}</small>
             </InputWrapper>
             <InputWrapper>
-              <label>I lager</label>
+              <label htmlFor="stock">I lager</label>
               <IconWrapper>
                 <span>{stockIcon}</span>
                 <input
+                  id="stock"
                   type="number"
                   placeholder="Antal i lager"
                   value={stock}

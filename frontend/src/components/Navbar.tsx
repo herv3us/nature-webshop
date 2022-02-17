@@ -110,6 +110,7 @@ const StyledNavbar = styled.nav`
   list-style-type: none;
   color: #353535;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+  height: 75px;
 
   .home {
     font-size: 3.5rem;

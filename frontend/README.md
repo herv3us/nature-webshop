@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Nature - your adventure starts here 💚
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A project for school, where we were suppose to make a fictional webshop with the theme - Nature.
 
-## Available Scripts
+As a guest you can browse products, see a more detailed popup about the product, when clicking on a product.
 
-In the project directory, you can run:
+As a customer you can login and add products to your cart, change the amount of products in cart, remove products from the cart and make a purchase.
 
-### `npm start`
+As an logged in admin for the webshop, you can update already existing products, add new products and delete products.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Links 🏄🏼‍♀️
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[GitHub-Repo](https://github.com/herv3us/nature-webshop)
 
-### `npm test`
+[Demo of project](https://nature-webshop.herokuapp.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started with the application
 
-### `npm run build`
+1. Fork or download the code to your computer.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Begin with installing all the dependencies by running `npm install` in both the server and the frontend folders.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Start the backend by running `npm run start` in the server folder. Backend is running on port 8000.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start the frontend by running `npm run start` in the frontend folder. Frontend is running on port 3000.
 
-### `npm run eject`
+5. If it wont open by itself, open your browser on `http://localhost:3000` to see the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+6. This application require an .env-file. Place it in the server folder with these variables:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- MONGODB_URI -> an url to your mongoDB atlas
+- JWT_SECRET - a secret to decode jason web token
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+7. If you would like to run the tests, make sure you're in the frontend folder and type in `npm run test`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## User Stories
 
-## Learn More
+1. As a guest I would like the ability to browse products, so I know what the store is selling.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. As a guest I would like the ability to search for a product, so I can find what I'm looking for.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. As a guest I would like to be able to see the amount of 'in stock' of a product, so I can figure out if I have to hurry with a purchase or not.
+
+4. As a customer I would like the ability to login, so that I can place an order.
+
+5. As a customer I would like the ability to add a product to my cart.
+
+6. As a cutomer I would like the ability to open the whole cart, to see all the products I put in there.
+
+7. As a customer I would like the ability to change the amount of a product, in the cart.
+
+8. As a cosutmer I could like to be able to change my mind about a product and delete the product from my cart.
+
+9. As an admin for the webshop, I would like to create a new product, so I can expand my store.
+
+10. As an admin I would like the ability to update an already existing product, if the information is worng or out of date.
+
+11. As an admin I would like the ability to remove a product that is no longer for sale in the store.
+
+## Photos 🖼️
+
+All the images are from [unsplash.com](https://www.unsplash.com)
+
+All the videos are from [coverr.co](https://coverr.co/)
+
+## Hope you liked the application
+
+Please contact me if you have any questions about the application, want to work on something together, or just want chat about code a little.
+
+[GitHub Profile](https://github.com/herv3us)
+
+Until next time
+💚 Love Sofia

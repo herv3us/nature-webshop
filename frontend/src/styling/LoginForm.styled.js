@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
 export const Form = styled.form`
   background-color: #fff;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   padding: 2rem 2.2rem 4rem;
   text-align: center;
   border-radius: 0.4rem;
@@ -39,11 +39,6 @@ export const InputWrapper = styled.div`
       outline: none;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     }
-  }
-
-  .invisible {
-    /* visibility: hidden; */
-    opacity: 0;
   }
 
   .valid {
