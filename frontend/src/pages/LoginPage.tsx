@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import LogoutBtn from '../components/LogoutBtn';
 import CreateProduct from '../components/admin/CreateProduct';
 import AdminInformation from '../components/admin/AdminInformation';
+import UserInfo from '../components/admin/UserInfo';
 
 function LoginPage() {
   const token = getTokenFromLocalStorage();
@@ -29,7 +30,10 @@ function LoginPage() {
       {token && user?.role === 'admin' && (
         <Wrapper>
           <LogoutBtn />
-          <AdminInformation />
+          <div>
+            <AdminInformation />
+            {/* <UserInfo /> */}
+          </div>
           <CreateProduct />
         </Wrapper>
       )}
