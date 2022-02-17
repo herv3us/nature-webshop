@@ -12,8 +12,11 @@ import {
   Message,
 } from '../styling/LoginForm.styled';
 import { useNavigate } from 'react-router-dom';
+import SignUpPate from '../pages/SignUpPate';
 
 function LoginForm() {
+  const [isActive, setIsActive] = useState(true);
+
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -89,37 +92,59 @@ function LoginForm() {
   };
 
   return (
-    <Wrapper>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <h2>Logga in</h2>
-        <InputWrapper>
-          <label>Användarnamn</label>
-          <input
-            type="text"
-            placeholder="Användarnamn"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            onBlur={onBlurUsernameHandler}
-            className={usernameInputStyling}
-          />
-          <small className={usernameMessageStyling}>{usernameMessage}</small>
-        </InputWrapper>
-        <InputWrapper>
-          <label>Lösenord</label>
-          <input
-            type="password"
-            placeholder="Lösenord"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onBlur={onBlurPasswordHandler}
-            className={passwordInputStyling}
-          />
-          <small className={passwordMessageStyling}>{passwrodMessage}</small>
-        </InputWrapper>
-        <Button>Login</Button>
-      </Form>
-      {message && <Message>{message}</Message>}
-    </Wrapper>
+    <>
+      {isActive ? (
+        <Wrapper>
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <h2>Logga in</h2>
+            <InputWrapper>
+              <label>Användarnamn</label>
+              <input
+                type="text"
+                placeholder="Användarnamn"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onBlur={onBlurUsernameHandler}
+                className={usernameInputStyling}
+              />
+              <small className={usernameMessageStyling}>
+                {usernameMessage}
+              </small>
+            </InputWrapper>
+            <InputWrapper>
+              <label>Lösenord</label>
+              <input
+                type="password"
+                placeholder="Lösenord"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onBlur={onBlurPasswordHandler}
+                className={passwordInputStyling}
+              />
+              <small className={passwordMessageStyling}>
+                {passwrodMessage}
+              </small>
+            </InputWrapper>
+            <Button>Login</Button>
+          </Form>
+          {message && <Message>{message}</Message>}
+          <Wrapper>
+            <small>
+              Inte kund ännu? Bli kund
+              <Button onClick={() => setIsActive(false)}>här</Button>
+            </small>
+          </Wrapper>
+        </Wrapper>
+      ) : (
+        <Wrapper>
+          <SignUpPate />
+          <small>
+            Redan kund? Logga in
+            <Button onClick={() => setIsActive(true)}>här</Button>
+          </small>
+        </Wrapper>
+      )}
+    </>
   );
 }
 

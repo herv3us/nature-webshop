@@ -43,6 +43,7 @@ const StyledHeadings = styled.div`
   font-size: 2.5rem;
   color: #eee;
   background-color: #eeeeee44;
+  text-shadow: 0 0 3px rgba(118, 119, 118, 0.3);
   padding: 2rem 4rem;
   border-radius: 3px;
   margin-top: -17rem;

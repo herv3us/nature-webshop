@@ -30,7 +30,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   font-size: 1.05rem;
-  padding: 0.5rem 1rem 0.5rem 1.8rem;
+  padding: 0.5rem 5rem 0.5rem 5rem;
   z-index: 10;
   height: 60px;
 `;
@@ -42,7 +42,7 @@ const Icons = styled.div`
 
   a {
     color: #476647f4;
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     transition: all 0.3s;
 
     &:hover {
