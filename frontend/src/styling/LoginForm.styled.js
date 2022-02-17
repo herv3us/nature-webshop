@@ -68,7 +68,8 @@ export const Button = styled.button`
   transition: all ease 0.3s;
 
   &:hover {
-    background-color: lightgreen;
+    background-color: #476647e4;
+    color: #eee;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
 

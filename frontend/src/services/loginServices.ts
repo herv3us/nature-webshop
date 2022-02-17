@@ -15,8 +15,6 @@ export const login = async (username: string, password: string) => {
 };
 
 export const createNewUser = async (userObj: object) => {
-  console.log('in createNewUser', userObj)
-
   try {
     const newUser = await fetch('/api/users', {
       method: 'POST',
@@ -26,7 +24,6 @@ export const createNewUser = async (userObj: object) => {
       body: JSON.stringify(userObj),
     });
     const userData = await newUser.json();
-    console.log(userData)
     return userData;
   } catch(err) {
     console.log(err)
