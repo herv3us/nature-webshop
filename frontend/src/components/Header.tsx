@@ -42,6 +42,7 @@ const StyledHeadings = styled.div`
   justify-content: center;
   font-size: 2.5rem;
   color: #eee;
+  text-shadow: 0 0 3px rgba(124, 124, 124, 0.3);
   background-color: #eeeeee44;
   padding: 2rem 4rem;
   border-radius: 3px;
