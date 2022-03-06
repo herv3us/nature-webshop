@@ -1,21 +1,27 @@
 const User = require('../models/userModel');
+const ErrorRepsonse = require('../utilities/errorResponse');
 
 const login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
 
     if (!username || !password) {
-      return;
+      return next(new ErrorRepsonse('Fill in both username and password', 400));
     }
 
     const user = await User.findOne({ username });
     if (!user) {
-      return;
+      return next(
+        new ErrorRepsonse(
+          "Can't fint that user in the database, try again",
+          404
+        )
+      );
     }
 
     const isMatch = await user.checkPassword(password, user.password);
     if (!isMatch) {
-      return;
+      return next(new ErrorRepsonse('Wrong credentials', 401));
     }
 
     res.status(200).json({
@@ -24,7 +30,7 @@ const login = async (req, res, next) => {
       token: user.getToken(),
     });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
 

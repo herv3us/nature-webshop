@@ -1,16 +1,16 @@
 const User = require('./../models/userModel');
 
-const getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({});
-    res.status(200).json({
-      success: true,
-      users: users,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const getAllUsers = async (req, res, next) => {
+//   try {
+//     const users = await User.find({});
+//     res.status(200).json({
+//       success: true,
+//       users: users,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 const getUserById = async (req, res, next) => {
   try {
@@ -57,7 +57,7 @@ const createUser = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllUsers,
+  // getAllUsers,
   getUserById,
   createUser,
 };

@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const router = new Router();
+const tokenHandler = require('../miggleware/tokenHandler');
 const productController = require('./../controllers/productController');
 
 // get all the products
@@ -9,7 +10,7 @@ router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 
 // create new product for the shop
-router.post('/', productController.createProduct);
+router.post('/', tokenHandler, productController.createProduct);
 
 // update product
 router.put('/:id', productController.updateProduct);

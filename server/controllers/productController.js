@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+const ErrorRepsonse = require('../utilities/errorResponse');
 const Product = require('./../models/productModel');
+const User = require('./../models/userModel');
 // const User = require('./../models/userModel');
 
 const getAllProducts = async (req, res, next) => {
@@ -36,16 +38,19 @@ const getProductById = async (req, res, next) => {
 const createProduct = async (req, res, next) => {
   try {
     const product = req.body;
-    // TODO Måste kolla att man är admin för att lägga till en product...
-    // TODO Måste stämma överrens med en inloggad user...
+    const user = await User.findById(req.userId);
+    console.log(user);
 
-    const newProduct = await Product.create(product);
+    if (user.role !== 'admin') {
+      return next(new ErrorRepsonse('Not authorized', 401));
+    }
+    await Product.create(product);
     res.status(200).json({
       success: true,
       product: product,
     });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
 
@@ -68,7 +73,7 @@ const updateProduct = async (req, res, next) => {
       product: updateProduct,
     });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
 
