@@ -51,7 +51,7 @@ export const deleteProduct = async (productId: string, token: string) => {
   const res = await fetch(`/api/products/${productId}`, {
     method: 'DELETE',
     headers: {
-      Autorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     },
   })
   const data = await res.json()

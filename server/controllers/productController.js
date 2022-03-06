@@ -39,11 +39,11 @@ const createProduct = async (req, res, next) => {
   try {
     const product = req.body;
     const user = await User.findById(req.userId);
-    console.log(user);
 
     if (user.role !== 'admin') {
       return next(new ErrorRepsonse('Not authorized', 401));
     }
+
     await Product.create(product);
     res.status(200).json({
       success: true,
@@ -80,6 +80,12 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   try {
     const productId = req.params.id;
+    const user = await User.findById(req.userId);
+
+    if (user.role !== 'admin') {
+      return next(new ErrorRepsonse('Not authorized', 401));
+    }
+
     await Product.findByIdAndDelete(productId);
 
     res.status(200).json({

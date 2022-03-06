@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = new Router();
-const tokenHandler = require('../miggleware/tokenHandler');
+const tokenHandler = require('../middleware/tokenHandler');
 const productController = require('./../controllers/productController');
 
 // get all the products
@@ -16,6 +16,6 @@ router.post('/', tokenHandler, productController.createProduct);
 router.put('/:id', productController.updateProduct);
 
 // delte product
-router.delete('/:id', productController.deleteProduct);
+router.delete('/:id', tokenHandler, productController.deleteProduct);
 
 module.exports = router;
