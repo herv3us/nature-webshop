@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const ErrorRepsonse = require('../utilities/errorResponse');
 const Product = require('./../models/productModel');
 const User = require('./../models/userModel');
-// const User = require('./../models/userModel');
 
 const getAllProducts = async (req, res, next) => {
   try {
